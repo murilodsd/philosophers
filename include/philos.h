@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/21 20:04:33 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:05:25 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ typedef struct s_program
 
 }	t_program;
 
-void	check_mem(t_game *game, t_list **ptr_or_matrix_list, \
+void	check_mem(t_program *program, t_list **ptr_or_matrix_list, \
 	void *ptr, char *error_msg);
 #endif
