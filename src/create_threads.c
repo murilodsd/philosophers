@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 05:06:18 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/23 21:41:39 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/23 22:13:13 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	*pthread_created(void *params)
 		pthread_mutex_lock(&philo->forks[right_fork_index]);
 		ft_printf(1, "Philo %d got the right fork %d\n", philo->number, right_fork_index + 1);
 		sleep(2);
-		pthread_mutex_unlock(&philo->forks[left_fork_index]);
 		ft_printf(1, "Philo %d left the left fork %d\n", philo->number, left_fork_index + 1);
-		pthread_mutex_unlock(&philo->forks[right_fork_index]);
 		ft_printf(1, "Philo %d left the right fork %d\n", philo->number, right_fork_index + 1);
+		pthread_mutex_unlock(&philo->forks[left_fork_index]);
+		pthread_mutex_unlock(&philo->forks[right_fork_index]);
 	}
 	else
 	{
@@ -46,10 +46,10 @@ void	*pthread_created(void *params)
 		pthread_mutex_lock(&philo->forks[left_fork_index]);
 		ft_printf(1, "Philo %d got the left fork %d\n", philo->number, left_fork_index + 1);
 		sleep(2);
-		pthread_mutex_unlock(&philo->forks[right_fork_index]);
 		ft_printf(1, "Philo %d left the right fork %d\n", philo->number, right_fork_index + 1);
-		pthread_mutex_unlock(&philo->forks[left_fork_index]);
 		ft_printf(1, "Philo %d left the left fork %d\n", philo->number, left_fork_index + 1);
+		pthread_mutex_unlock(&philo->forks[right_fork_index]);
+		pthread_mutex_unlock(&philo->forks[left_fork_index]);
 	}
 	pthread_exit(NULL);	
 }
