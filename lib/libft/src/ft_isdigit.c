@@ -6,9 +6,11 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 20:55:59 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/21 19:55:35 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/22 19:07:29 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../include/libft.h"
 
 /** This function checks if the given character is a digit (0-9).
  * @param c The character to be checked.
@@ -23,15 +25,15 @@ int	ft_isdigit(int c)
  * @param str The string to be checked.
  * @return 1 if all characters are digits, 0 otherwise.
  */
-int	ft_isalldigits(char *str)
+bool	ft_isalldigits(char *str)
 {
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
-			return (0);
+			return (FALSE);
 		str++;
 	}
-	return (1);
+	return (TRUE);
 }
 /*#include <stdio.h>
 

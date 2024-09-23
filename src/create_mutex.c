@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philos.h                                           :+:      :+:    :+:   */
+/*   create_mutex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/21 20:05:25 by mde-souz         ###   ########.fr       */
+/*   Created: 2024/09/23 07:31:24 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/09/23 13:20:52 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-# include <unistd.h>
-# include <fcntl.h>
-# include <mlx.h>
-# include <stdlib.h>
-# include "../lib/libft/include/libft.h"
-# include "./structures.h"
+#include "../include/philo.h"
 
-typedef struct s_program
+/** 
+ * Falta fazer a checagem ainda.
+*/
+void	create_all_mutex(t_philo *philo)
 {
-	t_mem_allocation	mem_allocation;
+	int	i;
 
-}	t_program;
-
-void	check_mem(t_program *program, t_list **ptr_or_matrix_list, \
-	void *ptr, char *error_msg);
-#endif
+	philo->forks = ft_calloc(philo->n_of_philos, \
+		sizeof(pthread_mutex_t *));
+	i = 0;
+	while (i < philo->n_of_philos)
+	{
+		pthread_mutex_init(&forks[i], NULL);
+		i++;
+	}
+}

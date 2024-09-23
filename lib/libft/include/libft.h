@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:52:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/21 20:02:38 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/23 05:11:07 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <pthread.h>
 
 typedef struct s_list
 {
@@ -73,7 +74,7 @@ typedef struct s_mem_allocation
 {
 	t_list	*ptr_mem_list;
 	t_list	*matrix_mem_list;
-}	t_mem_allocation;
+}	t_mem_alloc;
 
 typedef unsigned long	t_ul;
 
@@ -86,7 +87,7 @@ int		ft_putnbr_fd(int n, int fd);
 int		ft_isupper(int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_isdigit(int c);
-int	ft_isalldigits(char *str);
+bool	ft_isalldigits(char *str);
 int		ft_isprint(int c);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
@@ -108,6 +109,8 @@ int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
+int		ft_isspace(char c);
+bool	ft_is_atoi_param(const char *nptr);
 long	ft_atoi(const char *nptr);
 char	*ft_char_to_byte(unsigned char c);
 int		ft_byte_to_char(char *byte);
@@ -148,10 +151,10 @@ char	*get_next_line(int fd);
 //--------------------------------------------------------//
 //--------------CHECK_ERROR AND FREE MEMORY---------------//
 //--------------------------------------------------------//
-void	ft_free_exit_error(t_mem_allocation *mem_allocation, char *error_msg);
-void	ft_save_pointer(t_mem_allocation *mem_allocation, \
+void	ft_free_exit_error(t_mem_alloc *mem_allocation, char *error_msg);
+void	ft_save_pointer(t_mem_alloc *mem_allocation, \
 	t_list **ptr_or_matrix_list, void *ptr);
-void	ft_check_mem_alloc(t_mem_allocation *mem_allocation, \
+void	ft_check_mem_alloc(t_mem_alloc *mem_allocation, \
 	t_list **ptr_or_matrix_list, void *ptr, char *error_msg);
 void	ft_free_matrix(void *matrix_void);
 void	ft_free_ptr_buffer(char **buffer, int size);

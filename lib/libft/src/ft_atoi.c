@@ -6,18 +6,27 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:26:58 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/07/01 17:13:44 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/22 19:08:37 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* The  atoi() function converts the initial portion of the string pointed
 to by nptr to int. */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 int	ft_isspace(char c)
 {
 	return ((c >= 9 && c <= 13) || c == ' ');
+}
+
+bool ft_is_atoi_param(const char *nptr)
+{
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '+' || *nptr == '-')
+		nptr++;
+	return (ft_isalldigits((char *)nptr));
 }
 
 long	ft_atoi(const char *nptr)
