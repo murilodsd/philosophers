@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/23 13:21:08 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/23 20:56:07 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,10 @@ typedef struct s_philo
 	bool				*is_over;
 	int	number;
 	bool	*is_anyone_dead;	
-	pthread_t	thread;
+	pthread_t	*threads;
 	pthread_mutex_t	*forks;
 }	t_philo;
 
-void	check_mem(t_program *program, t_list **ptr_or_matrix_list, \
-	void *ptr, char *error_msg);
-void	create_all_mutex(t_philo *philo)
-void	get_arguments(int argc, char *argv[], t_philo *philo);
+void	create_all_mutex(t_philo *philo);
+void	get_arguments_and_init(int argc, char *argv[], t_philo **philo);
 #endif

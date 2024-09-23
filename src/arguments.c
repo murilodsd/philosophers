@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/23 12:41:54 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/23 20:55:26 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,41 @@ number_of_times_each_philosopher_must_eat is optional");
 	}
 }
 
-void	get_arguments(int argc, char *argv[], t_philo *philo)
-{
+void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
+{	
+	int	n_of_philos;
+	int	i;
+	
 	check_arguments(argc, argv);
-	philo->n_of_philos = ft_atoi(argv[1]);
-	philo->time_to_die = ft_atoi(argv[2]);
-	philo->time_to_eat = ft_atoi(argv[3]);
-	philo->time_to_sleep = ft_atoi(argv[4]);
-	if (argc == 6)
-		philo->n_of_times_to_eat = ft_atoi(argv[5]);
+	n_of_philos = ft_atoi(argv[1]);
+	(*philo) = ft_calloc(n_of_philos, sizeof(t_philo));
+	//checar
+	(*philo)->forks = ft_calloc(n_of_philos, sizeof(pthread_mutex_t));
+	//checar
+	(*philo)->threads = ft_calloc(n_of_philos, sizeof(pthread_t));
+	//checar
+	i = 0;
+	while (i < n_of_philos)
+	{
+		(*philo)[i].n_of_philos = n_of_philos;
+		(*philo)[i].time_to_die = ft_atoi(argv[2]);
+		(*philo)[i].time_to_eat = ft_atoi(argv[3]);
+		(*philo)[i].time_to_sleep = ft_atoi(argv[4]);
+		if (argc == 6)
+			(*philo)[i].n_of_times_to_eat = ft_atoi(argv[5]);
+		(*philo)[i].is_over = FALSE;
+		(*philo)[i].is_anyone_dead = FALSE;
+		(*philo)[i].forks = (*philo)->forks;
+		(*philo)[i].threads = (*philo)->threads;
+		i++;
+	}
 }
 
 /* int	main(int argc, char *argv[])
 {
 	t_philo	philo;
 
-	get_arguments(argc, argv, &philo);
+	get_arguments_and_init(argc, argv, &philo);
 	ft_printf(1, "Numero de philosofos: %d\n", philo.n_of_philos);
 	ft_printf(1, "tempo para morrer: %d\n", philo.time_to_die);
 	ft_printf(1, "tempo para comer: %d\n", philo.time_to_eat);
