@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/23 20:55:26 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:03:25 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,13 @@ number_of_times_each_philosopher_must_eat is optional");
 
 void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
 {	
-	int	n_of_philos;
 	int	i;
-	
-	check_arguments(argc, argv);
+	int	n_of_philos;
+
 	n_of_philos = ft_atoi(argv[1]);
-	(*philo) = ft_calloc(n_of_philos, sizeof(t_philo));
-	//checar
-	(*philo)->forks = ft_calloc(n_of_philos, sizeof(pthread_mutex_t));
-	//checar
-	(*philo)->threads = ft_calloc(n_of_philos, sizeof(pthread_t));
-	//checar
 	i = 0;
-	while (i < n_of_philos)
-	{
+/* 	while (i < n_of_philos)
+	{ */
 		(*philo)[i].n_of_philos = n_of_philos;
 		(*philo)[i].time_to_die = ft_atoi(argv[2]);
 		(*philo)[i].time_to_eat = ft_atoi(argv[3]);
@@ -66,10 +59,10 @@ void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
 			(*philo)[i].n_of_times_to_eat = ft_atoi(argv[5]);
 		(*philo)[i].is_over = FALSE;
 		(*philo)[i].is_anyone_dead = FALSE;
-		(*philo)[i].forks = (*philo)->forks;
+/* 		(*philo)[i].forks = (*philo)->forks;
 		(*philo)[i].threads = (*philo)->threads;
 		i++;
-	}
+	} */
 }
 
 /* int	main(int argc, char *argv[])
