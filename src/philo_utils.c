@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_mutex.c                                     :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 07:31:24 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/25 17:59:45 by mde-souz         ###   ########.fr       */
+/*   Created: 2024/09/26 03:24:16 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/09/26 03:44:23 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "philo.h"
 
-/** 
- * Falta fazer a checagem ainda.
-*/
-void	create_all_mutex(t_philo *philo)
+int	get_time(void)
 {
-	int	i;
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	return(1000 * tv.tv_sec + tv.tv_usec / 1000);
+}
 
-	i = 0;
-	while (i < philo->n_of_philos)
-	{
-		pthread_mutex_init(&philo->forks[i], NULL);
-		i++;
-	}
-	pthread_mutex_init(&philo->print_mutex, NULL);
+int main(int argc, char const *argv[])
+{
+	int	start_time;
+	
+	start_time = get_time();
+	sleep(1);
+	ft_printf(1,"%d",(get_time() - start_time));
+	return (0);
 }

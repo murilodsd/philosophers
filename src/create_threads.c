@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 05:06:18 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/24 15:07:37 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:59:30 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	*pthread_created(void *params)
 	if (threads_params->number % 2 == 1)
 	{
 		pthread_mutex_lock(&threads_params->philo->forks[left_fork_index]);
-		ft_printf(1, "Philo %d got the left fork %d\n", threads_params->number, left_fork_index + 1);
+		print_action(threads_params->philo, "Philo %d got the left fork %d\n", threads_params->number, left_fork_index + 1);
 		pthread_mutex_lock(&threads_params->philo->forks[right_fork_index]);
-		ft_printf(1, "Philo %d got the right fork %d\n", threads_params->number, right_fork_index + 1);
+		print_action(threads_params->philo, "Philo %d got the right fork %d\n", threads_params->number, right_fork_index + 1);
 		sleep(2);
-		ft_printf(1, "Philo %d left the left fork %d\n", threads_params->number, left_fork_index + 1);
-		ft_printf(1, "Philo %d left the right fork %d\n", threads_params->number, right_fork_index + 1);
+		print_action(threads_params->philo, "Philo %d left the left fork %d\n", threads_params->number, left_fork_index + 1);
+		print_action(threads_params->philo, "Philo %d left the right fork %d\n", threads_params->number, right_fork_index + 1);
 		pthread_mutex_unlock(&threads_params->philo->forks[left_fork_index]);
 		pthread_mutex_unlock(&threads_params->philo->forks[right_fork_index]);
 	}
@@ -43,11 +43,11 @@ void	*pthread_created(void *params)
 	{
 		pthread_mutex_lock(&threads_params->philo->forks[right_fork_index]);
 		pthread_mutex_lock(&threads_params->philo->forks[left_fork_index]);
-		ft_printf(1, "Philo %d got the left fork %d\n", threads_params->number, left_fork_index + 1);
-		ft_printf(1, "Philo %d got the right fork %d\n", threads_params->number, right_fork_index + 1);
+		print_action(threads_params->philo, "Philo %d got the left fork %d\n", threads_params->number, left_fork_index + 1);
+		print_action(threads_params->philo, "Philo %d got the right fork %d\n", threads_params->number, right_fork_index + 1);
 		sleep(2);
-		ft_printf(1, "Philo %d left the right fork %d\n", threads_params->number, right_fork_index + 1);
-		ft_printf(1, "Philo %d left the left fork %d\n", threads_params->number, left_fork_index + 1);
+		print_action(threads_params->philo, "Philo %d left the right fork %d\n", threads_params->number, right_fork_index + 1);
+		print_action(threads_params->philo, "Philo %d left the left fork %d\n", threads_params->number, left_fork_index + 1);
 		pthread_mutex_unlock(&threads_params->philo->forks[right_fork_index]);
 		pthread_mutex_unlock(&threads_params->philo->forks[left_fork_index]);
 	}
@@ -75,6 +75,7 @@ void	create_all_philos(t_philo *philo)
 		create_philo(philo, i);
 		i++;
 	}
+	i = 0;
 	while(i < philo->n_of_philos)
 		pthread_join(philo->threads[i++], NULL);
 }
@@ -101,7 +102,6 @@ int	main(int argc, char *argv[])
 	if (argc == 6)
 		ft_printf(1, "nº de vezes que cada filosofo deve comer: %d\n", \
 			philo->n_of_times_to_eat);
-	create_all_philos(philo);
-	sleep(6);	
+	create_all_philos(philo);	
 	return (0);
 }

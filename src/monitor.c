@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_mutex.c                                     :+:      :+:    :+:   */
+/*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 07:31:24 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/25 17:59:45 by mde-souz         ###   ########.fr       */
+/*   Created: 2024/09/25 17:08:23 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/09/25 17:59:18 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "philo.h"
 
-/** 
- * Falta fazer a checagem ainda.
-*/
-void	create_all_mutex(t_philo *philo)
+void	print_action(t_philo *philo, char *msg, int philo_number, int fork_number)
 {
-	int	i;
-
-	i = 0;
-	while (i < philo->n_of_philos)
-	{
-		pthread_mutex_init(&philo->forks[i], NULL);
-		i++;
-	}
-	pthread_mutex_init(&philo->print_mutex, NULL);
+	pthread_mutex_lock(&philo->print_mutex);
+	ft_printf(1, msg, philo_number, fork_number);
+	pthread_mutex_unlock(&philo->print_mutex);
 }
+
+/* int main(int argc, char const *argv[])
+{
+	print_action(NULL, "Philo %d got the left fork %d\n", 1, 2);
+	return 0;
+} */
+

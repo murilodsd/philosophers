@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/24 15:03:25 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/26 03:37:10 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,17 @@ void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
 	i = 0;
 /* 	while (i < n_of_philos)
 	{ */
-		(*philo)[i].n_of_philos = n_of_philos;
-		(*philo)[i].time_to_die = ft_atoi(argv[2]);
-		(*philo)[i].time_to_eat = ft_atoi(argv[3]);
-		(*philo)[i].time_to_sleep = ft_atoi(argv[4]);
+		(*philo)->n_of_philos = n_of_philos;
+		(*philo)->time_to_die = ft_atoi(argv[2]);
+		(*philo)->time_to_eat = ft_atoi(argv[3]);
+		(*philo)->time_to_sleep = ft_atoi(argv[4]);
 		if (argc == 6)
-			(*philo)[i].n_of_times_to_eat = ft_atoi(argv[5]);
-		(*philo)[i].is_over = FALSE;
-		(*philo)[i].is_anyone_dead = FALSE;
-/* 		(*philo)[i].forks = (*philo)->forks;
-		(*philo)[i].threads = (*philo)->threads;
+			(*philo)->n_of_times_to_eat = ft_atoi(argv[5]);
+		(*philo)->is_over = FALSE;
+		(*philo)->is_anyone_dead = FALSE;
+		(*philo)->start_time = get_time();
+/* 		(*philo)->forks = (*philo)->forks;
+		(*philo)->threads = (*philo)->threads;
 		i++;
 	} */
 }

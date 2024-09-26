@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/23 20:56:07 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/26 03:43:35 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,22 @@ typedef struct s_philo
 	int					time_to_sleep;
 	int					n_of_times_to_eat;
 	bool				*is_over;
-	int	number;
-	bool	*is_anyone_dead;	
+	bool	*is_anyone_dead;
+	int	start_time;	
 	pthread_t	*threads;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	print_mutex;
 }	t_philo;
 
+typedef struct s_threads_params
+{
+	t_philo	*philo;
+	int	number;
+} t_threads_params;
+
 void	create_all_mutex(t_philo *philo);
+void	check_arguments(int argc, char *argv[]);
 void	get_arguments_and_init(int argc, char *argv[], t_philo **philo);
+void	print_action(t_philo *philo, char *msg, int philo_number, int fork_number);
+int	get_time(void);
 #endif
