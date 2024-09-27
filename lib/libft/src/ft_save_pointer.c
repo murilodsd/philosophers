@@ -6,11 +6,11 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 14:39:19 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/22 18:36:20 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/27 03:59:54 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 void	ft_save_pointer(t_mem_alloc *mem_allocation, \
 	t_list **ptr_or_matrix_list, void *ptr)

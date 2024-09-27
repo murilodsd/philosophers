@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 07:31:24 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/25 17:59:45 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/26 05:06:03 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	create_all_mutex(t_philo *philo)
 		i++;
 	}
 	pthread_mutex_init(&philo->print_mutex, NULL);
+	philo->print_mutex_initialized = TRUE;
 }

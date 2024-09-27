@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/26 03:37:10 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/27 05:10:17 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,21 @@ number_of_times_each_philosopher_must_eat is optional");
 
 void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
 {	
-	int	i;
-	int	n_of_philos;
-
-	n_of_philos = ft_atoi(argv[1]);
-	i = 0;
-/* 	while (i < n_of_philos)
-	{ */
-		(*philo)->n_of_philos = n_of_philos;
-		(*philo)->time_to_die = ft_atoi(argv[2]);
-		(*philo)->time_to_eat = ft_atoi(argv[3]);
-		(*philo)->time_to_sleep = ft_atoi(argv[4]);
-		if (argc == 6)
-			(*philo)->n_of_times_to_eat = ft_atoi(argv[5]);
-		(*philo)->is_over = FALSE;
-		(*philo)->is_anyone_dead = FALSE;
-		(*philo)->start_time = get_time();
-/* 		(*philo)->forks = (*philo)->forks;
-		(*philo)->threads = (*philo)->threads;
-		i++;
-	} */
+	errno = 0;
+	/* (*philo)->mem_alloc.ptr_mem_list = NULL;
+	(*philo)->mem_alloc.matrix_mem_list = NULL; */
+	(*philo)->n_of_philos = ft_atoi(argv[1]);
+	(*philo)->time_to_die = ft_atoi(argv[2]);
+	(*philo)->time_to_eat = ft_atoi(argv[3]);
+	(*philo)->time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		(*philo)->n_of_times_to_eat = ft_atoi(argv[5]);
+	(*philo)->is_over = FALSE;
+	(*philo)->is_anyone_dead = FALSE;
+	(*philo)->start_time = get_time();
+	(*philo)->forks = NULL;
+	(*philo)->threads = NULL;
+	(*philo)->print_mutex_initialized = FALSE;
 }
 
 /* int	main(int argc, char *argv[])

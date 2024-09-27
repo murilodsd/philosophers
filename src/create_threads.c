@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 05:06:18 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/25 17:59:30 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/27 05:28:53 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	*pthread_created(void *params)
 		pthread_mutex_unlock(&threads_params->philo->forks[right_fork_index]);
 		pthread_mutex_unlock(&threads_params->philo->forks[left_fork_index]);
 	}
+	free(threads_params);
 	pthread_exit(NULL);	
 }
 void	create_philo(t_philo *philo, int index)
@@ -86,14 +87,17 @@ int	main(int argc, char *argv[])
 	int	n_of_philos;
 	
 	check_arguments(argc, argv);
-	n_of_philos = ft_atoi(argv[1]);
 	philo = ft_calloc(1, sizeof(t_philo));
-	//checar
-	philo->forks = ft_calloc(n_of_philos, sizeof(pthread_mutex_t));
-	//checar
-	philo->threads = ft_calloc(n_of_philos, sizeof(pthread_t));
-	//checar
+	if (!philo)
+	{
+		ft_printf(2, "ft_calloc failed");
+		exit(EXIT_FAILURE);
+	}
 	get_arguments_and_init(argc, argv, &philo);
+	philo->forks = ft_calloc(philo->n_of_philos, sizeof(pthread_mutex_t));
+	check_mem_alloc(philo,&philo->mem_alloc.ptr_mem_list,philo->forks,"ft_calloc failed");
+	philo->threads = ft_calloc(philo->n_of_philos, sizeof(pthread_t));
+	check_mem_alloc(philo,&philo->mem_alloc.ptr_mem_list,philo->threads,"ft_calloc failed");
 	create_all_mutex(philo);
 	ft_printf(1, "Numero de philosofos: %d\n", philo->n_of_philos);
 	ft_printf(1, "tempo para morrer: %d\n", philo->time_to_die);
@@ -102,6 +106,8 @@ int	main(int argc, char *argv[])
 	if (argc == 6)
 		ft_printf(1, "nº de vezes que cada filosofo deve comer: %d\n", \
 			philo->n_of_times_to_eat);
-	create_all_philos(philo);	
+	create_all_philos(philo);
+	destroy_all(philo);
+	free_all(philo);
 	return (0);
 }

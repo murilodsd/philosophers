@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/26 03:43:35 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:41:22 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_philo
 	pthread_t	*threads;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
+	bool                print_mutex_initialized;
 }	t_philo;
 
 typedef struct s_threads_params
@@ -53,4 +54,9 @@ void	check_arguments(int argc, char *argv[]);
 void	get_arguments_and_init(int argc, char *argv[], t_philo **philo);
 void	print_action(t_philo *philo, char *msg, int philo_number, int fork_number);
 int	get_time(void);
+void	check_mem_alloc(t_philo *philo, t_list **ptr_or_matrix_list, void *ptr, char *error_msg);
+void	save_pointer(t_philo *philo, t_list **ptr_or_matrix_list, void *ptr);
+void	destroy_all(t_philo *philo);
+void	free_all(t_philo *philo);
+void	free_exit_error(t_philo *philo, char *error_msg);
 #endif
