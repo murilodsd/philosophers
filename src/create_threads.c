@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 05:06:18 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/27 05:28:53 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:21:08 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,11 @@ void	*pthread_created(void *params)
 	else
 		right_fork_index = threads_params->number - 2;
 	//ft_printf(1, "Philo %d created, Garfo da direita %d, Garfo da esquerda %d\n", philo->number, right_fork_index + 1, left_fork_index + 1);
-
-	if (threads_params->number % 2 == 1)
+	while (1)
 	{
-		pthread_mutex_lock(&threads_params->philo->forks[left_fork_index]);
-		print_action(threads_params->philo, "Philo %d got the left fork %d\n", threads_params->number, left_fork_index + 1);
-		pthread_mutex_lock(&threads_params->philo->forks[right_fork_index]);
-		print_action(threads_params->philo, "Philo %d got the right fork %d\n", threads_params->number, right_fork_index + 1);
-		sleep(2);
-		print_action(threads_params->philo, "Philo %d left the left fork %d\n", threads_params->number, left_fork_index + 1);
-		print_action(threads_params->philo, "Philo %d left the right fork %d\n", threads_params->number, right_fork_index + 1);
-		pthread_mutex_unlock(&threads_params->philo->forks[left_fork_index]);
-		pthread_mutex_unlock(&threads_params->philo->forks[right_fork_index]);
-	}
-	else
-	{
-		pthread_mutex_lock(&threads_params->philo->forks[right_fork_index]);
-		pthread_mutex_lock(&threads_params->philo->forks[left_fork_index]);
-		print_action(threads_params->philo, "Philo %d got the left fork %d\n", threads_params->number, left_fork_index + 1);
-		print_action(threads_params->philo, "Philo %d got the right fork %d\n", threads_params->number, right_fork_index + 1);
-		sleep(2);
-		print_action(threads_params->philo, "Philo %d left the right fork %d\n", threads_params->number, right_fork_index + 1);
-		print_action(threads_params->philo, "Philo %d left the left fork %d\n", threads_params->number, left_fork_index + 1);
-		pthread_mutex_unlock(&threads_params->philo->forks[right_fork_index]);
-		pthread_mutex_unlock(&threads_params->philo->forks[left_fork_index]);
+		get_forks(threads_params, &threads_params->philo->forks[left_fork_index], &threads_params->philo->forks[right_fork_index]);
+		start_to_sleep(threads_params);
+		start_to_think(threads_params);
 	}
 	free(threads_params);
 	pthread_exit(NULL);	
@@ -106,6 +87,7 @@ int	main(int argc, char *argv[])
 	if (argc == 6)
 		ft_printf(1, "nº de vezes que cada filosofo deve comer: %d\n", \
 			philo->n_of_times_to_eat);
+	philo->start_time = get_time();
 	create_all_philos(philo);
 	destroy_all(philo);
 	free_all(philo);

@@ -6,13 +6,13 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 03:24:16 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/26 04:59:30 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:07:42 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	get_time(void)
+long	get_time(void)
 {
 	struct timeval tv;
 	gettimeofday(&tv, NULL);

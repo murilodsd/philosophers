@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 04:27:17 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/27 05:31:36 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:03:54 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	destroy_free_exit_error(t_philo *philo, char *error_msg)
 	free_all(philo);
 	exit(EXIT_FAILURE);
 }
-
 
 void	free_all(t_philo *philo)
 {
@@ -51,6 +50,18 @@ void	destroy_all(t_philo *philo)
 	}
 }
 
+/**
+ * @brief Saves a pointer in a linked list.
+ *
+ * This function creates a new node with the given pointer and adds it to the 
+ * front of the provided linked list. If memory allocation for the new node 
+ * fails, it calls the destroy_free_exit_error function to handle the error.
+ *
+ * @param philo A pointer to the t_philo structure, used for error handling.
+ * @param ptr_or_matrix_list A double pointer to the head of the linked list 
+ * where the new node will be added.
+ * @param ptr The pointer to be saved in the new node.
+ */
 void	save_pointer(t_philo *philo, \
 	t_list **ptr_or_matrix_list, void *ptr)
 {
