@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/02 10:37:15 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/08 20:46:16 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_philo
 	int	 				time_to_eat;
 	int					time_to_sleep;
 	int					n_of_times_to_eat;
+	long	*time_started_to_eat;
 	bool				*is_over;
 	bool	*is_anyone_dead;	
 	pthread_t	*threads;
@@ -47,13 +48,12 @@ typedef struct s_threads_params
 {
 	t_philo	*philo;
 	int	number;
-	int	time_started_to_eat;
 } t_threads_params;
 
 void	create_all_mutex(t_philo *philo);
 void	check_arguments(int argc, char *argv[]);
 void	get_arguments_and_init(int argc, char *argv[], t_philo **philo);
-void	print_action(t_threads_params *threads_params, char *msg);
+void	print_action(t_threads_params *threads_params, char *msg, bool is_eating);
 long	get_time(void);
 void	get_forks(t_threads_params *threads_params, pthread_mutex_t *left_fork_mutex, pthread_mutex_t *right_fork_mutex);
 void	check_mem_alloc(t_philo *philo, t_list **ptr_or_matrix_list, void *ptr, char *error_msg);

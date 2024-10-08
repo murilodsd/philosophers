@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 05:06:18 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/02 10:21:08 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/08 20:37:44 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	*pthread_created(void *params)
 	else
 		right_fork_index = threads_params->number - 2;
 	//ft_printf(1, "Philo %d created, Garfo da direita %d, Garfo da esquerda %d\n", philo->number, right_fork_index + 1, left_fork_index + 1);
+	if (threads_params->number % 2 == 0)
+		usleep(200);
 	while (1)
 	{
 		get_forks(threads_params, &threads_params->philo->forks[left_fork_index], &threads_params->philo->forks[right_fork_index]);
@@ -76,9 +78,11 @@ int	main(int argc, char *argv[])
 	}
 	get_arguments_and_init(argc, argv, &philo);
 	philo->forks = ft_calloc(philo->n_of_philos, sizeof(pthread_mutex_t));
-	check_mem_alloc(philo,&philo->mem_alloc.ptr_mem_list,philo->forks,"ft_calloc failed");
+	check_mem_alloc(philo, &philo->mem_alloc.ptr_mem_list, philo->forks, "ft_calloc failed");
 	philo->threads = ft_calloc(philo->n_of_philos, sizeof(pthread_t));
-	check_mem_alloc(philo,&philo->mem_alloc.ptr_mem_list,philo->threads,"ft_calloc failed");
+	check_mem_alloc(philo, &philo->mem_alloc.ptr_mem_list, philo->threads, "ft_calloc failed");
+	philo->time_started_to_eat = ft_calloc(philo->n_of_philos, sizeof(long));
+	check_mem_alloc(philo, &philo->mem_alloc.ptr_mem_list, philo->time_started_to_eat, "ft_calloc failed");
 	create_all_mutex(philo);
 	ft_printf(1, "Numero de philosofos: %d\n", philo->n_of_philos);
 	ft_printf(1, "tempo para morrer: %d\n", philo->time_to_die);
