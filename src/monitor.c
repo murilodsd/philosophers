@@ -6,15 +6,15 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:08:23 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/08 20:48:11 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/10 20:22:40 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	set_time_philo_started_to_eat(t_threads_params *threads_params, long time_now)
+void	set_time_philo_started_to_eat(t_threads_params *threads_params, long long time_now)
 {
-	long	*time_started_to_eat;
+	long long	*time_started_to_eat;
 
 	time_started_to_eat = threads_params->philo->time_started_to_eat;
 	time_started_to_eat[threads_params->number - 1] = time_now;
@@ -34,12 +34,13 @@ void	print_action(t_threads_params *threads_params, char *msg, bool is_eating)
 
 void	get_forks(t_threads_params *threads_params, pthread_mutex_t *left_fork_mutex, pthread_mutex_t *right_fork_mutex)
 {
+		check_if_any_philo_died(threads_params);
 		pthread_mutex_lock(left_fork_mutex);
 		print_action(threads_params, "%d %d has taken a fork\n", FALSE);
 		pthread_mutex_lock(right_fork_mutex);
 		print_action(threads_params, "%d %d has taken a fork\n", FALSE);
 		print_action(threads_params, "%d %d is eating\n", TRUE);
-		usleep(1000 * threads_params->philo->time_to_eat);
+		ft_msleep(threads_params->philo->time_to_eat);
 		pthread_mutex_unlock(right_fork_mutex);
 		pthread_mutex_unlock(left_fork_mutex);
 }
@@ -47,7 +48,7 @@ void	get_forks(t_threads_params *threads_params, pthread_mutex_t *left_fork_mute
 void	start_to_sleep(t_threads_params *threads_params)
 {
 	print_action(threads_params, "%d %d is sleeping\n", FALSE);
-	usleep(1000 * threads_params->philo->time_to_sleep);
+	ft_msleep(threads_params->philo->time_to_sleep);
 }
 
 void	start_to_think(t_threads_params *threads_params)
