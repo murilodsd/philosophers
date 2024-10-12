@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/27 14:20:23 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/11 13:57:15 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,11 @@ void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
 		(*philo)->n_of_times_to_eat = ft_atoi(argv[5]);
 	(*philo)->is_over = FALSE;
 	(*philo)->is_anyone_dead = FALSE;
-	(*philo)->start_time = get_time();
+	(*philo)->started_time = get_time();
 	(*philo)->forks = NULL;
 	(*philo)->threads = NULL;
 	(*philo)->print_mutex_initialized = FALSE;
+	(*philo)->all_philos_created = FALSE;
 }
 
 /* int	main(int argc, char *argv[])

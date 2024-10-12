@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/10 20:23:10 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/11 22:47:50 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,16 @@
 typedef struct s_philo
 {
 	t_mem_alloc	mem_alloc;
-	long long			start_time;
+	long long			started_time;
 	int					n_of_philos;
 	int					time_to_die;
 	int	 				time_to_eat;
 	int					time_to_sleep;
 	int					n_of_times_to_eat;
 	long long	*time_started_to_eat;
-	bool				*is_over;
-	bool	is_anyone_dead;	
+	bool			is_over;
+	bool			is_anyone_dead;
+	bool			all_philos_created;
 	pthread_t	*threads;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
@@ -60,7 +61,7 @@ void		get_forks(t_threads_params *threads_params, pthread_mutex_t *left_fork_mut
 void		check_mem_alloc(t_philo *philo, t_list **ptr_or_matrix_list, void *ptr, char *error_msg);
 void		start_to_think(t_threads_params *threads_params);
 void		start_to_sleep(t_threads_params *threads_params);
-void	check_if_any_philo_died(t_threads_params *threads_params);
+void	check_if_am_dead_or_program_is_over(t_threads_params *threads_params);
 void		save_pointer(t_philo *philo, t_list **ptr_or_matrix_list, void *ptr);
 void		destroy_all(t_philo *philo);
 void		free_all(t_philo *philo);

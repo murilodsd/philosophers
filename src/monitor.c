@@ -6,18 +6,18 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:08:23 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/10 20:22:40 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/11 23:12:44 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	set_time_philo_started_to_eat(t_threads_params *threads_params, long long time_now)
+void	set_time_philo_started_to_eat(t_threads_params *threads_params)
 {
 	long long	*time_started_to_eat;
 
 	time_started_to_eat = threads_params->philo->time_started_to_eat;
-	time_started_to_eat[threads_params->number - 1] = time_now;
+	time_started_to_eat[threads_params->number - 1] = get_time();
 }
 
 void	print_action(t_threads_params *threads_params, char *msg, bool is_eating)
@@ -25,16 +25,16 @@ void	print_action(t_threads_params *threads_params, char *msg, bool is_eating)
 	long	time_now;
 
 	pthread_mutex_lock(&threads_params->philo->print_mutex);
-	time_now = get_time() - threads_params->philo->start_time;
 	if (is_eating == TRUE)
-		set_time_philo_started_to_eat(threads_params, time_now);
+		set_time_philo_started_to_eat(threads_params);
+	time_now = get_time() - threads_params->philo->started_time;
 	ft_printf(1, msg, time_now, threads_params->number);
 	pthread_mutex_unlock(&threads_params->philo->print_mutex);
 }
 
 void	get_forks(t_threads_params *threads_params, pthread_mutex_t *left_fork_mutex, pthread_mutex_t *right_fork_mutex)
 {
-		check_if_any_philo_died(threads_params);
+		check_if_am_dead_or_program_is_over(threads_params);
 		pthread_mutex_lock(left_fork_mutex);
 		print_action(threads_params, "%d %d has taken a fork\n", FALSE);
 		pthread_mutex_lock(right_fork_mutex);

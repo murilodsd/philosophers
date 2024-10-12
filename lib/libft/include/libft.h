@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:52:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/26 03:26:26 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/11 22:35:50 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@
 # endif
 # ifndef FALSE
 #  define FALSE 0
+# endif
+
+# ifndef COLOR_DEFINES_H
+#  define COLOR_DEFINES_H
+ 
+// Reset da formatação (volta ao padrão)
+#  define RESET   "\x1b[0m"
+
+// Cores normais (texto)
+#  define BLACK   "\x1b[30m"
+#  define RED     "\x1b[31m"
+#  define GREEN   "\x1b[32m"
+#  define YELLOW  "\x1b[33m"
+#  define BLUE    "\x1b[34m"
+#  define MAGENTA "\x1b[35m"
+#  define CYAN    "\x1b[36m"
+#  define WHITE   "\x1b[37m"
 # endif
 
 # include <unistd.h>
