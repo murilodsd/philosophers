@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 05:06:18 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/11 23:20:27 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/12 13:22:26 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	*pthread_created(void *params)
 		right_fork_index = threads_params->philo->n_of_philos - 1;
 	else
 		right_fork_index = threads_params->number - 2;
-	while (!threads_params->philo->all_philos_created)
+	while (!threads_params->philo->is_all_philos_created)
 		;
 	//ft_printf(1, "Philo %d created, Garfo da direita %d, Garfo da esquerda %d\n", philo->number, right_fork_index + 1, left_fork_index + 1);
 	if (threads_params->number % 2 == 0)
@@ -95,6 +95,7 @@ void	create_philo(t_philo *philo, int index)
 	threads_params = ft_calloc(1, sizeof(t_threads_params));
 	threads_params->number = index + 1;
 	threads_params->philo = philo;
+	threads_params->eat_count = 0;
 	//ft_printf(1, "entrou no create philo number %d\n", philo->number);
 	pthread_create(&philo->threads[index], NULL, pthread_created, threads_params);	
 }
@@ -110,7 +111,7 @@ void	start_dinner(t_philo *philo)
 		philo->time_started_to_eat[i] = philo->started_time;
 		i++;
 	}
-	philo->all_philos_created = TRUE;
+	philo->is_all_philos_created = TRUE;
 }
 
 void	create_all_philos(t_philo *philo)
@@ -128,11 +129,25 @@ void	create_all_philos(t_philo *philo)
 	i = 0;
 }
 
-void	wait_philo_die(t_philo *philo)
+bool	check_all_philos_fed(t_philo *philo)
 {
 	int	i;
-	
-	while (!philo->is_anyone_dead)
+
+	i = 0;
+	while(i < philo->n_of_philos)
+	{
+		if (philo->is_philo_enough_fed[i] == FALSE)
+			return (FALSE);
+	}	
+	return (TRUE);
+}
+
+void	wait_philo_die_or_philos_fed(t_philo *philo)
+{
+	int		i;
+	bool	philos_fed;
+
+	while (!philo->is_anyone_dead && !check_all_philos_fed(philo))
 		;
 	philo->is_over = TRUE;
 	i = 0;
@@ -169,7 +184,7 @@ int	main(int argc, char *argv[])
 			philo->n_of_times_to_eat);
 	create_all_philos(philo);
 	wait_philo_die(philo);
-	destroy_all(philo);
+	destroy_all_mutex(philo);
 	free_all(philo);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 04:27:17 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/09/27 14:03:54 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:50:58 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	destroy_free_exit_error(t_philo *philo, char *error_msg)
 		ft_printf(2, "Error\n%s: %s\n", error_msg, strerror(errno));
 	else
 		ft_printf(2, "Error\n%s\n", error_msg);
-	destroy_all(philo);
+	destroy_all_mutex(philo);
 	free_all(philo);
 	exit(EXIT_FAILURE);
 }
@@ -32,19 +32,28 @@ void	free_all(t_philo *philo)
 	free(philo);
 }
 
-void	destroy_all(t_philo *philo)
+void	destroy_mutex(pthread_mutex_t *mutex, bool is_initialized)
+{
+	if (is_initialized)
+		pthread_mutex_destroy(mutex);
+}
+
+void	destroy_all_mutex(t_philo *philo)
 {
 	int	i;
 
-	if (philo->print_mutex_initialized)
-		pthread_mutex_destroy(&philo->print_mutex);
+	destroy_mutex(&philo->print_mutex, philo->print_mutex_initialized);
+	destroy_mutex(&philo->is_over_mutex, philo->is_over_mutex_initialized);
+	destroy_mutex(&philo->is_anyone_dead_mutex, philo->is_anyone_dead_mutex_initialized);
+	destroy_mutex(&philo->is_all_philos_created_mutex, philo->is_all_philos_created_mutex_initialized);
+	destroy_mutex(&philo->is_philo_enough_fed_mutex, philo->is_philo_enough_fed_mutex_initialized);
 	if (philo->forks)
 	{
 		i = 0;
 		while(i < philo->n_of_philos)
 		{
 			if (&philo->forks[i])
-				pthread_mutex_destroy(&philo->forks[i]);
+				destroy_mutex(&philo->forks[i], TRUE);
 			i++;
 		}
 	}
