@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/11 13:57:15 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/12 13:07:14 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,20 @@ void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
 	(*philo)->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		(*philo)->n_of_times_to_eat = ft_atoi(argv[5]);
+	else
+		(*philo)->n_of_times_to_eat = -1;
+		
 	(*philo)->is_over = FALSE;
 	(*philo)->is_anyone_dead = FALSE;
+	(*philo)->is_all_philos_created = FALSE;
 	(*philo)->started_time = get_time();
 	(*philo)->forks = NULL;
 	(*philo)->threads = NULL;
 	(*philo)->print_mutex_initialized = FALSE;
-	(*philo)->all_philos_created = FALSE;
+	(*philo)->is_over_mutex_initialized = FALSE;
+	(*philo)->is_anyone_dead_mutex_initialized = FALSE;
+	(*philo)->is_all_philos_created_mutex_initialized = FALSE;
+	(*philo)->is_philo_enough_fed_mutex_initialized = FALSE;
 }
 
 /* int	main(int argc, char *argv[])

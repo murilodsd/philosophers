@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/11 22:47:50 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:50:58 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,29 @@ typedef struct s_philo
 	int					time_to_sleep;
 	int					n_of_times_to_eat;
 	long long	*time_started_to_eat;
+	bool		*is_philo_enough_fed;
 	bool			is_over;
 	bool			is_anyone_dead;
-	bool			all_philos_created;
+	bool			is_all_philos_created;
 	pthread_t	*threads;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	is_over_mutex;
+	pthread_mutex_t	is_anyone_dead_mutex;
+	pthread_mutex_t	is_all_philos_created_mutex;
+	pthread_mutex_t	is_philo_enough_fed_mutex;
 	bool                print_mutex_initialized;
+	bool                is_over_mutex_initialized;
+	bool                is_anyone_dead_mutex_initialized;
+	bool                is_all_philos_created_mutex_initialized;
+	bool                is_philo_enough_fed_mutex_initialized;
 }	t_philo;
 
 typedef struct s_threads_params
 {
 	t_philo	*philo;
 	int	number;
+	int	eat_count;
 } t_threads_params;
 
 void		create_all_mutex(t_philo *philo);
@@ -63,7 +73,7 @@ void		start_to_think(t_threads_params *threads_params);
 void		start_to_sleep(t_threads_params *threads_params);
 void	check_if_am_dead_or_program_is_over(t_threads_params *threads_params);
 void		save_pointer(t_philo *philo, t_list **ptr_or_matrix_list, void *ptr);
-void		destroy_all(t_philo *philo);
+void		destroy_all_mutex(t_philo *philo);
 void		free_all(t_philo *philo);
-void		free_exit_error(t_philo *philo, char *error_msg);
+void		destroy_free_exit_error(t_philo *philo, char *error_msg);
 #endif
