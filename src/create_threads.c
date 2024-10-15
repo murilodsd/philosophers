@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 05:06:18 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/15 04:20:04 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:20:01 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@ void	*pthread_created(void *params)
 	int	right_fork_index;
 
 	threads_params = (t_threads_params *)params;
-	//ft_printf(1, "Philo number %d\n", philo->number);
 	left_fork_index = threads_params->number - 1;
 	if (threads_params->number == 1)
 		right_fork_index = threads_params->philo->n_of_philos - 1;
 	else
 		right_fork_index = threads_params->number - 2;
-	while (!threads_params->philo->is_all_philos_created)
+	while (!safe_get_bool(&threads_params->philo->is_all_philos_created_mutex, &threads_params->philo->is_all_philos_created))
 		;
-	//ft_printf(1, "Philo %d created, Garfo da direita %d, Garfo da esquerda %d\n", philo->number, right_fork_index + 1, left_fork_index + 1);
 	if (threads_params->number % 2 == 0)
 		usleep(1000);
 	while (1)
@@ -53,8 +51,12 @@ void	create_philo(t_philo *philo, int index)
 	threads_params->number = index + 1;
 	threads_params->philo = philo;
 	threads_params->eat_count = 0;
-	//ft_printf(1, "entrou no create philo number %d\n", philo->number);
 	pthread_create(&philo->threads[index], NULL, pthread_created, threads_params);	
+}
+
+void	set_all_threads_created(t_philo *philo)
+{
+	safe_set_bool(&philo->is_all_philos_created_mutex, &philo->is_all_philos_created, TRUE);
 }
 
 void	start_dinner(t_philo *philo)
@@ -65,16 +67,16 @@ void	start_dinner(t_philo *philo)
 	i = 0;
 	while(i < philo->n_of_philos)
 	{
-		philo->time_started_to_eat[i] = philo->started_time;
+		safe_set_long_long(&philo->is_all_philos_created_mutex, &philo->time_started_to_eat[i], philo->started_time);
 		i++;
 	}
-	philo->is_all_philos_created = TRUE;
+	set_all_threads_created(philo);
 }
 
 void	create_all_philos(t_philo *philo)
 {
 	int	i;
-	
+
 	i = 0; 
 	while(i < philo->n_of_philos)
 	{	

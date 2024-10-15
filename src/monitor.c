@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:08:23 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/15 05:01:54 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:13:31 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,24 @@ void	print_debug(t_philo *philo, char *msg)
 	pthread_mutex_unlock(&philo->print_mutex);
 }
 
+void	set_philo_enough_fed_true(t_threads_params *threads_params)
+{
+	t_philo *philo;
+
+	philo = threads_params->philo;
+	safe_set_bool(&philo->is_philo_enough_fed_mutex, \
+		&philo->is_philo_enough_fed[threads_params->number - 1], TRUE);
+}
+
+void	check_philo_is_enough_fed(t_threads_params *threads_params)
+{
+	t_philo *philo;
+
+	philo = threads_params->philo;
+	if (threads_params->eat_count == philo->n_of_times_to_eat)
+		set_philo_enough_fed_true(threads_params);
+}
+
 void	get_forks(t_threads_params *threads_params, pthread_mutex_t *left_fork_mutex, pthread_mutex_t *right_fork_mutex)
 {
 	check_program_is_over(threads_params->philo);
@@ -69,16 +87,18 @@ void	get_forks(t_threads_params *threads_params, pthread_mutex_t *left_fork_mute
 	pthread_mutex_lock(right_fork_mutex);
 	print_action(threads_params, "%d %d has taken a fork\n", FALSE);
 	print_action(threads_params, "%d %d is eating\n", TRUE);
-	ft_msleep(philo, threads_params->philo->time_to_eat);
+	ft_msleep(threads_params->philo, threads_params->philo->time_to_eat);
 	pthread_mutex_unlock(right_fork_mutex);
 	pthread_mutex_unlock(left_fork_mutex);
+	threads_params->eat_count++;
+	check_philo_is_enough_fed(threads_params);
 }
 
 void	start_to_sleep(t_threads_params *threads_params)
 {
 	check_program_is_over(threads_params->philo);
 	print_action(threads_params, "%d %d is sleeping\n", FALSE);
-	ft_msleep(philo, threads_params->philo->time_to_sleep);
+	ft_msleep(threads_params->philo, threads_params->philo->time_to_sleep);
 }
 
 void	start_to_think(t_threads_params *threads_params)

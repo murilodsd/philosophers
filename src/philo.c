@@ -6,11 +6,22 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:07:32 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/15 04:29:16 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:50:18 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+long long	get_time_started_to_eat(t_philo *philo, int philo_index)
+{
+	return (safe_get_long_long(&philo->time_started_to_eat_mutex, \
+		&philo->time_started_to_eat[philo_index]));
+}
+
+void	set_is_over(t_philo *philo, bool value)
+{
+	safe_set_bool(&philo->is_over_mutex, &philo->is_over, value);
+}
 
 bool	check_philo_is_dead(t_philo *philo)
 {
@@ -24,10 +35,10 @@ bool	check_philo_is_dead(t_philo *philo)
 	while(i < philo->n_of_philos)
 	{
 		time_now = get_time();
-		time_without_eating = time_now - philo->time_started_to_eat[i];
+		time_without_eating = time_now - get_time_started_to_eat(philo, i);
 		if (time_without_eating >= philo->time_to_die)
 		{
-			philo->is_over = TRUE;
+			set_is_over(philo, TRUE);
 			print_death(philo, i + 1);
 			return (TRUE);
 		}
@@ -43,8 +54,9 @@ bool	check_all_philos_fed(t_philo *philo)
 	i = 0;
 	while(i < philo->n_of_philos)
 	{
-		if (philo->is_philo_enough_fed[i] == FALSE)
+		if (safe_get_bool(&philo->is_philo_enough_fed_mutex, &philo->is_philo_enough_fed[i]) == FALSE)
 			return (FALSE);
+		i++;
 	}
 	philo->is_over = TRUE;
 	return (TRUE);

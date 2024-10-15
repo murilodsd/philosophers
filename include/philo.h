@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/15 05:03:41 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:41:49 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ typedef struct s_philo
 	pthread_t	*threads;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	time_started_to_eat_mutex;
 	pthread_mutex_t	is_over_mutex;
 	pthread_mutex_t	is_anyone_dead_mutex;
 	pthread_mutex_t	is_all_philos_created_mutex;
 	pthread_mutex_t	is_philo_enough_fed_mutex;
 	bool                print_mutex_initialized;
+	bool                time_started_to_eat_initialized;
 	bool                is_over_mutex_initialized;
 	bool                is_anyone_dead_mutex_initialized;
 	bool                is_all_philos_created_mutex_initialized;
@@ -79,4 +81,8 @@ void		save_pointer(t_philo *philo, t_list **ptr_or_matrix_list, void *ptr);
 void		destroy_all_mutex(t_philo *philo);
 void		free_all(t_philo *philo);
 void		destroy_free_exit_error(t_philo *philo, char *error_msg);
+void		safe_set_bool(pthread_mutex_t *mutex, bool *variable, bool value);
+bool		safe_get_bool(pthread_mutex_t *mutex, bool *variable);
+void		safe_set_long_long(pthread_mutex_t *mutex, long long *variable, long long value);
+long long	safe_get_long_long(pthread_mutex_t *mutex, long long *variable);
 #endif
