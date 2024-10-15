@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:07:32 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/15 19:50:18 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:57:04 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ bool	check_philo_is_dead(t_philo *philo)
 	long long	time_now;
 
 	i = 0;
-	//TODO - CRIAR MUTEX PARA E FUNCAO PARA SETAR e GETAR TIME_STARTED_TO_EAT
-	//TODO - CRIAR MUTEX PARA E FUNCAO PARA SETAR e GETAR IS_OVER
 	while(i < philo->n_of_philos)
 	{
 		time_now = get_time();
