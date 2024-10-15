@@ -6,18 +6,20 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/12 13:07:14 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/12 16:19:51 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-static bool	is_positive_atoi_param(const char *nptr)
+static bool	is_positive_atoi_param_max_10_digits(const char *nptr)
 {
 	while (ft_isspace(*nptr))
 		nptr++;
 	if (*nptr == '+')
 		nptr++;
+	if (ft_strlen(nptr) > 10)
+		return (FALSE);
 	return (ft_isalldigits((char *)nptr));
 }
 
@@ -31,13 +33,13 @@ time_to_sleep [number_of_times_each_philosopher_must_eat]\n\
 number_of_times_each_philosopher_must_eat is optional");
 		exit(EXIT_FAILURE);
 	}
-	if (!is_positive_atoi_param(argv[1])
-		|| !is_positive_atoi_param(argv[2])
-		|| !is_positive_atoi_param(argv[3])
-		|| !is_positive_atoi_param(argv[4])
-		|| (argc == 6 && !is_positive_atoi_param(argv[5])))
+	if (!is_positive_atoi_param_max_10_digits(argv[1])
+		|| !is_positive_atoi_param_max_10_digits(argv[2])
+		|| !is_positive_atoi_param_max_10_digits(argv[3])
+		|| !is_positive_atoi_param_max_10_digits(argv[4])
+		|| (argc == 6 && !is_positive_atoi_param_max_10_digits(argv[5])))
 	{
-		ft_printf(2, "Error: All arguments must be a positive number\n");
+		ft_printf(2, "Error: All arguments must be a positive number and max of 10 digits\n");
 		exit(EXIT_FAILURE);
 	}
 }

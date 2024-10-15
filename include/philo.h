@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/12 12:50:58 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/15 05:03:41 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,20 @@ typedef struct s_threads_params
 	int	eat_count;
 } t_threads_params;
 
-void		create_all_mutex(t_philo *philo);
 void		check_arguments(int argc, char *argv[]);
 void		get_arguments_and_init(int argc, char *argv[], t_philo **philo);
+void		create_all_mutex(t_philo *philo);
+void		create_all_philos(t_philo *philo);
 void		print_action(t_threads_params *threads_params, char *msg, bool is_eating);
+void		print_death(t_philo *philo, int philo_number);
+void		print_debug(t_philo *philo, char *msg);
 long long	get_time(void);
-void		ft_msleep(long msec);
+void		ft_msleep(t_philo *philo, long msec);
 void		get_forks(t_threads_params *threads_params, pthread_mutex_t *left_fork_mutex, pthread_mutex_t *right_fork_mutex);
 void		check_mem_alloc(t_philo *philo, t_list **ptr_or_matrix_list, void *ptr, char *error_msg);
 void		start_to_think(t_threads_params *threads_params);
 void		start_to_sleep(t_threads_params *threads_params);
-void	check_if_am_dead_or_program_is_over(t_threads_params *threads_params);
+void		check_program_is_over(t_philo *philo);
 void		save_pointer(t_philo *philo, t_list **ptr_or_matrix_list, void *ptr);
 void		destroy_all_mutex(t_philo *philo);
 void		free_all(t_philo *philo);

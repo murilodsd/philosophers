@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:52:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/11 22:35:50 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/12 16:17:54 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_isspace(char c);
-bool	ft_is_atoi_param(const char *nptr);
+bool	ft_is_atoi_param_max_10(const char *nptr);
 long	ft_atoi(const char *nptr);
 char	*ft_char_to_byte(unsigned char c);
 int		ft_byte_to_char(char *byte);
