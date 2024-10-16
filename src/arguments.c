@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/15 19:39:19 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/16 08:39:41 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static bool	is_positive_atoi_param_max_10_digits(const char *nptr)
 		nptr++;
 	if (*nptr == '+')
 		nptr++;
+	if (ft_strlen(nptr) == 1 && *nptr == '0')
+		return (FALSE);
 	if (ft_strlen(nptr) > 10)
 		return (FALSE);
 	return (ft_isalldigits((char *)nptr));
