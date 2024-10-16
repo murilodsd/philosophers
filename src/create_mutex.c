@@ -6,14 +6,14 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 07:31:24 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/15 19:40:18 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:32:25 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
 /** 
- * Falta fazer a checagem ainda.
+ * TODO checagem
 */
 
 static void	initialize_mutex(t_philo *philo, pthread_mutex_t *mutex, bool *is_initialized)

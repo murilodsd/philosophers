@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:52:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/12 16:17:54 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:37:19 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,6 @@ typedef struct tag_parameter
 	char	tag;
 }	t_params;
 
-/* //ESTRUTURA PARA INFORMAR TIPO DE DADO EM FUNCAO QUE RECEBE *VOID
-typedef enum {
-	TYPE_VOID,
-	TYPE_INT,
-	TYPE_CHAR,
-	TYPE_POINTER
-}	t_data_type; */
 //Estrutura com pointers p/ listas q vão guardar *p e **p dinamic allocated
 typedef struct s_mem_allocation
 {

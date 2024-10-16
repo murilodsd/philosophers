@@ -6,26 +6,11 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 05:06:18 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 08:23:17 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:02:45 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-
-void	check_program_is_over(t_philo *philo)
-{
-	bool	is_over;
-
-	is_over = safe_get_bool(&philo->is_over_mutex,&philo->is_over);
-	if (is_over == TRUE)
-		pthread_exit(NULL);
-}
-
-bool	check_all_philo_created(t_threads_params *threads_params)
-{
-	return (safe_get_bool(&threads_params->philo->is_all_philos_created_mutex, \
-		&threads_params->philo->is_all_philos_created));
-}
 
 void	*pthread_created(void *params)
 {
@@ -39,7 +24,7 @@ void	*pthread_created(void *params)
 		right_fork_index = threads_params->philo->n_of_philos - 1;
 	else
 		right_fork_index = threads_params->number - 2;
-	while (!check_all_philo_created(threads_params))
+	while (!get_is_all_philo_created(threads_params))
 		;
 	if (threads_params->number % 2 == 0)
 		usleep(1000);
@@ -86,7 +71,7 @@ void	start_dinner(t_philo *philo)
 	i = 0;
 	while(i < philo->n_of_philos)
 	{
-		safe_set_long_long(&philo->is_all_philos_created_mutex, &philo->time_started_to_eat[i], philo->started_time);
+		safe_set_long_long(&philo->time_started_to_eat_mutex, &philo->time_started_to_eat[i], philo->started_time);
 		i++;
 	}
 	set_all_threads_created(philo);
