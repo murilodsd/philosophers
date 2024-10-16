@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 08:39:41 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/16 08:46:59 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,15 @@ void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
 	(*philo)->is_anyone_dead_mutex_initialized = FALSE;
 	(*philo)->is_all_philos_created_mutex_initialized = FALSE;
 	(*philo)->is_philo_enough_fed_mutex_initialized = FALSE;
+	
+	(*philo)->forks = ft_calloc((*philo)->n_of_philos, sizeof(pthread_mutex_t));
+	check_mem_alloc((*philo), &(*philo)->mem_alloc.ptr_mem_list, (*philo)->forks, "ft_calloc failed");
+	(*philo)->time_started_to_eat = ft_calloc((*philo)->n_of_philos, sizeof(long long));
+	check_mem_alloc((*philo), &(*philo)->mem_alloc.ptr_mem_list, (*philo)->time_started_to_eat, "ft_calloc failed");
+	(*philo)->is_philo_enough_fed = ft_calloc((*philo)->n_of_philos, sizeof(bool));
+	check_mem_alloc((*philo), &(*philo)->mem_alloc.ptr_mem_list, (*philo)->is_philo_enough_fed, "ft_calloc failed");
+	(*philo)->threads = ft_calloc((*philo)->n_of_philos, sizeof(pthread_t));
+	check_mem_alloc((*philo), &(*philo)->mem_alloc.ptr_mem_list, (*philo)->threads, "ft_calloc failed");
 }
 
 /* int	main(int argc, char *argv[])
