@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 16:33:18 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:16:42 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ number_of_times_each_philosopher_must_eat is optional");
 		|| !is_positive_atoi_param_max_10_digits(argv[4])
 		|| (argc == 6 && !is_positive_atoi_param_max_10_digits(argv[5])))
 	{
-		ft_printf(2, "Error: All arguments must be a positive number and max of 10 digits\n");
+		ft_printf(2, RED \
+			"Error: Arguments must be a positive and max of 10 digits\n"RESET);
 		exit(EXIT_FAILURE);
 	}
 }
 
 static void	init_pointers(t_philo **philo)
 {
-	int	n_of_philos;
+	int		n_of_philos;
 	t_list	*ptr_list;
 
 	ptr_list = (*philo)->mem_alloc.ptr_mem_list;
@@ -68,7 +69,7 @@ static void	init_pointers(t_philo **philo)
 }
 
 void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
-{	
+{
 	errno = 0;
 	(*philo)->n_of_philos = ft_atoi(argv[1]);
 	(*philo)->time_to_die = ft_atoi(argv[2]);

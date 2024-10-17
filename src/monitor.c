@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:08:23 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 16:31:49 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:51:57 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	print_action(t_threads_params *threads_params, char *msg, bool is_eating)
 		return ;
 	pthread_mutex_lock(&threads_params->philo->print_mutex);
 	if (is_eating == TRUE)
-		set_time_philo_started_to_eat(threads_params);
+		set_time_philo_started_to_eat(threads_params->philo, \
+			threads_params->number, get_time());
 	time_now = get_time() - threads_params->philo->started_time;
 	ft_printf(1, msg, time_now, threads_params->number);
 	pthread_mutex_unlock(&threads_params->philo->print_mutex);
@@ -39,16 +40,6 @@ void	print_death(t_philo *philo, int philo_number)
 	pthread_mutex_lock(&philo->print_mutex);
 	time_now = get_time() - philo->started_time;
 	ft_printf(1, RED "%d %d died\n" RESET, time_now, philo_number);
-	pthread_mutex_unlock(&philo->print_mutex);
-}
-
-void	print_debug(t_philo *philo, char *msg)
-{
-	long	time_now;
-
-	pthread_mutex_lock(&philo->print_mutex);
-	time_now = get_time() - philo->started_time;
-	ft_printf(1, msg);
 	pthread_mutex_unlock(&philo->print_mutex);
 }
 

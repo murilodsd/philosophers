@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:52:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 14:37:19 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/16 20:03:20 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # include <stdbool.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <stdio.h>
 
 typedef struct s_list
 {

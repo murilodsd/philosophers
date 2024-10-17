@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:49:54 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 17:58:34 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/17 19:25:36 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ bool	get_is_philo_enough_fed(t_philo *philo, int philo_nbr)
 		&philo->is_philo_enough_fed[philo_nbr]));
 }
 
-bool	get_is_over(t_threads_params *threads_params)
+bool	get_is_over(t_philo *philo)
 {
-	return (safe_get_bool(&threads_params->philo->is_over_mutex, \
-			&threads_params->philo->is_over));
+	return (safe_get_bool(&philo->is_over_mutex, \
+			&philo->is_over));
 }

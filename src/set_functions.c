@@ -6,18 +6,20 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:24:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 17:50:08 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/16 20:13:27 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	set_time_philo_started_to_eat(t_threads_params *threads_params)
+void	set_time_philo_started_to_eat(t_philo *philo, int philo_nbr, \
+	long long value)
 {
 	long long	*time_started_to_eat;
 
-	time_started_to_eat = threads_params->philo->time_started_to_eat;
-	time_started_to_eat[threads_params->number - 1] = get_time();
+	time_started_to_eat = philo->time_started_to_eat;
+	safe_set_long_long(&philo->time_started_to_eat_mutex, \
+		&time_started_to_eat[philo_nbr - 1], value);
 }
 
 void	set_philo_enough_fed_true(t_threads_params *threads_params)
@@ -32,4 +34,9 @@ void	set_philo_enough_fed_true(t_threads_params *threads_params)
 void	set_is_over(t_philo *philo, bool value)
 {
 	safe_set_bool(&philo->is_over_mutex, &philo->is_over, value);
+}
+
+void	set_all_threads_created(t_philo *philo)
+{
+	safe_set_bool(&philo->is_all_philos_created_mutex, &philo->is_all_philos_created, TRUE);
 }

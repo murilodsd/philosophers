@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 18:14:10 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/17 19:28:13 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,16 @@ void		check_program_is_over(t_philo *philo);
 bool		get_is_all_philo_created(t_threads_params *threads_params);
 long long	get_time_started_to_eat(t_philo *philo, int philo_index);
 bool		get_is_philo_enough_fed(t_philo *philo, int philo_nbr);
-bool		get_is_over(t_threads_params *threads_params);
+bool		get_is_over(t_philo *philo);
 
 //--------------------------------------------------------//
 //--------------------set_functions.c---------------------//
 //--------------------------------------------------------//
-void		set_time_philo_started_to_eat(t_threads_params *threads_params);
+void	set_time_philo_started_to_eat(t_philo *philo, int philo_nbr, \
+	long long value);
 void		set_philo_enough_fed_true(t_threads_params *threads_params);
 void		set_is_over(t_philo *philo, bool value);
+void		set_all_threads_created(t_philo *philo);
 
 //--------------------------------------------------------//
 //-------------monitor_set_get_functions.c----------------//

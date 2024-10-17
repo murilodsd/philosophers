@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 03:24:16 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 05:45:01 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/17 19:37:54 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ void	ft_msleep(t_philo *philo, long msec)
 	if (is_over == TRUE)
 		return ;
 	started_time = get_time();
+	while (get_time() - started_time < 50)
+		usleep(500);
 	while (get_time() - started_time < msec)
-		usleep(100);
+		;
 }
 
 

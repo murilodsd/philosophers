@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:19:23 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 17:51:17 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/17 19:26:58 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	check_philo_is_dead(t_philo *philo)
 	long long	time_now;
 
 	i = 0;
-	while(i < philo->n_of_philos)
+	while (i < philo->n_of_philos)
 	{
 		time_now = get_time();
 		time_without_eating = time_now - get_time_started_to_eat(philo, i);
@@ -36,7 +36,7 @@ bool	check_philo_is_dead(t_philo *philo)
 
 void	check_i_am_enough_fed(t_threads_params *threads_params)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = threads_params->philo;
 	check_program_is_over(philo);
@@ -50,21 +50,18 @@ bool	check_all_philos_fed(t_philo *philo)
 	bool	is_philo_enough_fed;
 
 	i = 0;
-	while(i < philo->n_of_philos)
+	while (i < philo->n_of_philos)
 	{
 		if (!get_is_philo_enough_fed(philo, i))
 			return (FALSE);
 		i++;
 	}
-	philo->is_over = TRUE;
+	set_is_over(philo, TRUE);
 	return (TRUE);
 }
 
 void	check_program_is_over(t_philo *philo)
 {
-	bool	is_over;
-
-	is_over = safe_get_bool(&philo->is_over_mutex,&philo->is_over);
-	if (is_over == TRUE)
+	if (get_is_over(philo))
 		pthread_exit(NULL);
 }
