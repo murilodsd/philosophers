@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 03:24:16 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/18 12:53:45 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/18 16:55:51 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ long long	get_time(void)
 void	ft_msleep(t_philo *philo, long msec)
 {
 	long long	started_time;
-	bool		is_over;
+	//bool		is_over;
 
-	is_over = safe_get_bool(&philo->is_over_mutex, &philo->is_over);
+	/* is_over = safe_get_bool(&philo->is_over_mutex, &philo->is_over);
 	if (is_over == TRUE)
-		return ;
+		return ; */
+	(void)philo;
 	started_time = get_time();
-	while (get_time() - started_time < 50)
-		usleep(500);
 	while (get_time() - started_time < msec)
-		;
+		usleep(500);
 }
 
 /* int main(int argc, char const *argv[])

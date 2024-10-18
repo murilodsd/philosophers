@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 05:06:18 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/18 13:36:05 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/18 15:13:32 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,28 @@ static void	handle_one_philo(t_threads_params *threads_params)
 
 static void	*pthread_created(void *params)
 {
-	t_threads_params	*threads_params;
-	t_philo				*philo;
+	t_threads_params	*tparams;
 	int					left_fork_index;
 	int					right_fork_index;
 
-	threads_params = (t_threads_params *)params;
-	philo = threads_params->philo;
-	left_fork_index = threads_params->number - 1;
-	if (threads_params->number == 1)
-		right_fork_index = philo->n_of_philos - 1;
+	tparams = (t_threads_params *)params;
+	left_fork_index = tparams->number - 1;
+	if (tparams->number == 1)
+		right_fork_index = tparams->philo->n_of_philos - 1;
 	else
-		right_fork_index = threads_params->number - 2;
-	while (!get_is_all_philo_created(threads_params))
+		right_fork_index = tparams->number - 2;
+	while (!get_is_all_philo_created(tparams))
 		;
-	if (threads_params->number % 2 == 0)
+	if (tparams->number % 2 == 0)
 		usleep(1000);
-	if (philo->n_of_philos == 1)
-		handle_one_philo(threads_params);
+	if (tparams->philo->n_of_philos == 1)
+		handle_one_philo(tparams);
 	while (1)
 	{
-		get_forks(threads_params, &philo->forks[left_fork_index], \
-			&philo->forks[right_fork_index]);
-		start_to_sleep(threads_params);
-		start_to_think(threads_params);
+		get_forks(tparams, &tparams->philo->forks[left_fork_index], \
+			&tparams->philo->forks[right_fork_index]);
+		start_to_sleep(tparams);
+		start_to_think(tparams);
 	}
 	return (NULL);
 }
@@ -90,6 +88,6 @@ void	create_all_philos(t_philo *philo)
 		create_philo(philo, i);
 		i++;
 	}
-	usleep(1000);
+	usleep(2000);
 	start_dinner(philo);
 }

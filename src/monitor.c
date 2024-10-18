@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:08:23 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/18 12:52:13 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:04:23 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_action(t_threads_params *threads_params, char *msg, \
 {
 	long	time_now;
 
-	if (threads_params->philo->is_over == TRUE)
+	if (get_is_over(threads_params->philo))
 		return ;
 	pthread_mutex_lock(&threads_params->philo->print_mutex);
 	if (is_eating == TRUE)
@@ -51,14 +51,20 @@ void	get_forks(t_threads_params *threads_params, \
 	pthread_mutex_t *left_fork_mutex, pthread_mutex_t *right_fork_mutex)
 {
 	check_program_is_over(threads_params->philo);
-	pthread_mutex_lock(left_fork_mutex);
+	if (threads_params->number % 2 == 1)
+		pthread_mutex_lock(left_fork_mutex);
+	else
+		pthread_mutex_lock(right_fork_mutex);
 	print_action(threads_params, "%d %d has taken a fork\n", FALSE);
-	pthread_mutex_lock(right_fork_mutex);
+	if (threads_params->number % 2 == 1)
+		pthread_mutex_lock(right_fork_mutex);
+	else
+		pthread_mutex_lock(left_fork_mutex);
 	print_action(threads_params, "%d %d has taken a fork\n", FALSE);
 	print_action(threads_params, "%d %d is eating\n", TRUE);
 	ft_msleep(threads_params->philo, threads_params->philo->time_to_eat);
-	pthread_mutex_unlock(right_fork_mutex);
 	pthread_mutex_unlock(left_fork_mutex);
+	pthread_mutex_unlock(right_fork_mutex);
 	threads_params->eat_count++;
 	check_i_am_enough_fed(threads_params);
 }
@@ -74,6 +80,7 @@ void	start_to_think(t_threads_params *threads_params)
 {
 	check_program_is_over(threads_params->philo);
 	print_action(threads_params, "%d %d is thinking\n", FALSE);
+	usleep(500);
 }
 /* int main(int argc, char const *argv[])
 {

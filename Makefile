@@ -1,5 +1,5 @@
 CC=cc
-CCFLAGS=-Wall -Wextra -Werror -g
+CCFLAGS= -fsanitize=thread -Wall -Wextra -Werror -g
 #MANDATORY
 NAME=philo
 SRC_PATH=src/
@@ -25,9 +25,9 @@ INCLUDE_PATH=./include/ ./lib/*/include/
 INCLUDE_FLAG=$(addprefix -I , $(INCLUDE_PATH))
 RM=rm -f
 
-all: libs $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJS) $(LIB_STATIC)
+$(NAME): libs $(OBJS) $(LIB_STATIC)
 	$(CC) $(CCFLAGS) $(OBJS) $(INCLUDE_FLAG) $(LIBS_FLAGS) -o $(NAME)
 
 libs:
