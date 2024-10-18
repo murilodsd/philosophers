@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:24:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 20:13:27 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:54:21 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_time_philo_started_to_eat(t_philo *philo, int philo_nbr, \
 
 void	set_philo_enough_fed_true(t_threads_params *threads_params)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = threads_params->philo;
 	safe_set_bool(&philo->is_philo_enough_fed_mutex, \
@@ -38,5 +38,6 @@ void	set_is_over(t_philo *philo, bool value)
 
 void	set_all_threads_created(t_philo *philo)
 {
-	safe_set_bool(&philo->is_all_philos_created_mutex, &philo->is_all_philos_created, TRUE);
+	safe_set_bool(&philo->is_all_philos_created_mutex, \
+		&philo->is_all_philos_created, TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/17 19:28:13 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/18 13:40:09 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,17 @@
 
 /**
  * n_of_philos: The number of philosophers and also the number of forks.
- * time_to_die (in milliseconds): If a philosopher didn’t start eating time_to_die
- * milliseconds since the beginning of their last meal or
+ * 
+ * time_to_die (in milliseconds): If a philosopher didn’t start eating 
+ * time_to_die milliseconds since the beginning of their last meal or
  * the beginning of the simulation, they die.
+ * 
  * time_to_eat (in milliseconds): The time it takes for a philosopher to eat.
  * During that time, they will need to hold two forks.
+ * 
  * time_to_sleep (in milliseconds): The time a philosopher will spend sleeping.
  * number_of_times_each_philosopher_must_eat (optional argument): 
- * If all philosophers have eaten at least number_of_times_each_philosopher_must_eat
+ * If all philosophers have eaten at least n_of_times_to_eat
  * times, the simulation stops. If not specified, the simulation stops when a
  * philosopher dies
  */
@@ -49,12 +52,13 @@ typedef struct s_philo
 	pthread_mutex_t	is_anyone_dead_mutex;
 	pthread_mutex_t	is_all_philos_created_mutex;
 	pthread_mutex_t	is_philo_enough_fed_mutex;
-	bool                print_mutex_initialized;
-	bool                time_started_to_eat_initialized;
-	bool                is_over_mutex_initialized;
-	bool                is_anyone_dead_mutex_initialized;
-	bool                is_all_philos_created_mutex_initialized;
-	bool                is_philo_enough_fed_mutex_initialized;
+	bool			*forks_mutex_initialized;
+	bool			print_mutex_initialized;
+	bool			time_started_to_eat_initialized;
+	bool			is_over_mutex_initialized;
+	bool			is_anyone_dead_mutex_initialized;
+	bool			is_all_philos_created_mutex_initialized;
+	bool			is_philo_enough_fed_mutex_initialized;
 }	t_philo;
 
 typedef struct s_threads_params

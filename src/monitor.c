@@ -6,19 +6,23 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:08:23 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 19:51:57 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:52:13 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/*Por fazermos a checagem se o programa terminou (ou por morte ou porque todos já foram alimentado)
-somente no início de cada ação (eat, sleep e think), pois uma vez dentro dessa ação,
-precisamos garantir que ela chegue até o final, para que os mutex sejam liberados. Portanto,
-pode ocorrer de uma thread estar presa em um mutex e a condição de fim do programa acabar, assim
-após o mutex ser liberado, ela acabaria "executando as ações", por isso
-precisamos colocar a condição de nada ser feito no início.*/
-void	print_action(t_threads_params *threads_params, char *msg, bool is_eating)
+/*Fazemos a checagem se o programa terminou (ou por morte ou
+porque todos já foram alimentado) somente no início de 
+cada ação (eat, sleep e think), afim de garantir que
+ela chegue até o final e os mutex sejam liberados
+não ocorrendo assim de outra thread ficar presa nesse mutex. 
+Por fazermos essa checagem somente no inicio, a ação poderia acabar executando
+algumas tarefas mesmo depois de já cumprida a condição de termino de program
+Portanto Se faz necessário verificar a condição de término do programa
+antes de cada de uma dessas tarefas da ação..*/
+void	print_action(t_threads_params *threads_params, char *msg, \
+	bool is_eating)
 {
 	long	time_now;
 
@@ -43,7 +47,8 @@ void	print_death(t_philo *philo, int philo_number)
 	pthread_mutex_unlock(&philo->print_mutex);
 }
 
-void	get_forks(t_threads_params *threads_params, pthread_mutex_t *left_fork_mutex, pthread_mutex_t *right_fork_mutex)
+void	get_forks(t_threads_params *threads_params, \
+	pthread_mutex_t *left_fork_mutex, pthread_mutex_t *right_fork_mutex)
 {
 	check_program_is_over(threads_params->philo);
 	pthread_mutex_lock(left_fork_mutex);
@@ -75,4 +80,3 @@ void	start_to_think(t_threads_params *threads_params)
 	print_action(NULL, "Philo %d got the left fork %d\n", 1, 2);
 	return 0;
 } */
-

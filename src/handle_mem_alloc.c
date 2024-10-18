@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:35:29 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 17:29:32 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:51:11 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,21 @@ static void	save_pointer(t_philo *philo, \
 /**
  * @brief Checks if memory allocation was successful and handles errors.
  *
- * ATTENTION!  THE POINTERS TO THE MEMORY LISTS MUST BE INITIALIZED TO NULL BEFORE USE
- * IF YOU HAVE A MEM ALLOC TO A POINTER TO A STRUCT THAT MANAGE ALL THE PROGRAM DO NOT CHECK THAT MEM ALLOC
+ * ATENTION! THE POINTERS TO THE MEM LISTS MUST BE INITIALIZED TO NULL BEFORE USE
+ * 
+ * IF YOU HAVE A MEM ALLOC TO A POINTER TO A STRUCT THAT MANAGE ALL THE PROGRAM 
+ * DO NOT CHECK THAT MEM ALLOC
  *
- * @param philo A pointer to the `t_philo` structure, which contains program state and memory allocation information.
- * @param ptr_or_matrix_list A double pointer to a list where the allocated pointer will be saved.
+ * @param philo A pointer to the `t_philo` structure, 
+ * which contains program state and memory allocation information.
+ * @param ptr_or_matrix_list A double pointer to a list
+ * where the allocated pointer will be saved.
  * @param ptr The pointer to the allocated memory to be checked.
- * @param error_msg A string containing the error message to be displayed if the allocation fails.
+ * @param error_msg A string containing the error message to be displayed
+ * if the allocation fails.
  */
-void	check_mem_alloc(t_philo *philo, t_list **ptr_or_matrix_list, void *ptr, char *error_msg)
+void	check_mem_alloc(t_philo *philo, t_list **ptr_or_matrix_list, \
+	void *ptr, char *error_msg)
 {
 	if (!ptr)
 		destroy_free_exit_error(philo, error_msg);

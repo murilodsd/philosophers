@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 04:27:17 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 19:18:27 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/18 13:30:19 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	destroy_all_mutex(t_philo *philo)
 		i = 0;
 		while (i < philo->n_of_philos)
 		{
-			if (&philo->forks[i])
+			if (philo->forks_mutex_initialized[i])
 				destroy_mutex(&philo->forks[i], TRUE);
 			i++;
 		}

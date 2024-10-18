@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 05:06:18 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/17 19:25:52 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/18 13:36:05 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	*pthread_created(void *params)
 		start_to_sleep(threads_params);
 		start_to_think(threads_params);
 	}
+	return (NULL);
 }
 
 static void	create_philo(t_philo *philo, int index)
@@ -62,7 +63,7 @@ static void	create_philo(t_philo *philo, int index)
 	threads_params->philo = philo;
 	threads_params->eat_count = 0;
 	pthread_create(&philo->threads[index], NULL, pthread_created, \
-		threads_params);	
+		threads_params);
 }
 
 static void	start_dinner(t_philo *philo)
@@ -71,9 +72,9 @@ static void	start_dinner(t_philo *philo)
 
 	philo->started_time = get_time();
 	i = 0;
-	while(i < philo->n_of_philos)
+	while (i < philo->n_of_philos)
 	{
-		set_time_philo_started_to_eat(philo , i + 1, philo->started_time);
+		set_time_philo_started_to_eat(philo, i + 1, philo->started_time);
 		i++;
 	}
 	set_all_threads_created(philo);
@@ -83,9 +84,9 @@ void	create_all_philos(t_philo *philo)
 {
 	int	i;
 
-	i = 0; 
-	while(i < philo->n_of_philos)
-	{	
+	i = 0;
+	while (i < philo->n_of_philos)
+	{
 		create_philo(philo, i);
 		i++;
 	}

@@ -1,9 +1,10 @@
 CC=cc
 CCFLAGS=-Wall -Wextra -Werror -g
 #MANDATORY
-NAME=
+NAME=philo
 SRC_PATH=src/
-SRCS_NAMES=
+SRCS_NAMES=arguments.c clean_program.c create_threads.c get_functions.c monitor.c philo.c set_functions.c \
+check_conditions.c create_mutex.c debug_functions.c handle_mem_alloc.c monitor_set_get_functions.c philo_utils.c
 OBJ_PATH=build/
 OBJS_NAMES=$(SRCS_NAMES:.c=.o)
 OBJS=$(addprefix $(OBJ_PATH), $(OBJS_NAMES))

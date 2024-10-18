@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 19:16:42 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/18 13:43:31 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,18 @@ static void	init_pointers(t_philo **philo)
 	(*philo)->threads = ft_calloc(n_of_philos, sizeof(pthread_t));
 	check_mem_alloc((*philo), &ptr_list, (*philo)->threads, \
 		"ft_calloc failed");
+	(*philo)->forks_mutex_initialized = ft_calloc(n_of_philos, sizeof(bool));
+	check_mem_alloc((*philo), &ptr_list, (*philo)->forks_mutex_initialized, \
+		"ft_calloc failed");
+}
+
+static void	init_fork_mutex_variable(t_philo **philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < (*philo)->n_of_philos)
+		(*philo)->forks_mutex_initialized[i++] = FALSE;
 }
 
 void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
@@ -92,6 +104,7 @@ void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
 	(*philo)->is_all_philos_created_mutex_initialized = FALSE;
 	(*philo)->is_philo_enough_fed_mutex_initialized = FALSE;
 	init_pointers(philo);
+	init_fork_mutex_variable(philo);
 }
 
 /* int	main(int argc, char *argv[])

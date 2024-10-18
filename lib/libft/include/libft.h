@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:52:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/16 20:03:20 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:57:15 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 
 # ifndef COLOR_DEFINES_H
 #  define COLOR_DEFINES_H
- 
-// Reset da formatação (volta ao padrão)
+
+//Reset da formatação (volta ao padrão)
 #  define RESET   "\x1b[0m"
 
 // Cores normais (texto)

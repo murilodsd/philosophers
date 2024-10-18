@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:26:58 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/12 16:17:54 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:22:41 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_isspace(char c)
 	return ((c >= 9 && c <= 13) || c == ' ');
 }
 
-bool ft_is_atoi_param_max_10(const char *nptr)
+bool	ft_is_atoi_param_max_10(const char *nptr)
 {
 	while (ft_isspace(*nptr))
 		nptr++;
