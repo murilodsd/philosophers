@@ -6,11 +6,11 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:08:23 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/18 17:04:23 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:05:58 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
 /*Fazemos a checagem se o programa terminou (ou por morte ou
 porque todos já foram alimentado) somente no início de 
@@ -25,15 +25,17 @@ void	print_action(t_threads_params *threads_params, char *msg, \
 	bool is_eating)
 {
 	long	time_now;
+	t_philo	*philo;
 
-	if (get_is_over(threads_params->philo))
-		return ;
-	pthread_mutex_lock(&threads_params->philo->print_mutex);
+	philo = threads_params->philo;
 	if (is_eating == TRUE)
-		set_time_philo_started_to_eat(threads_params->philo, \
+		set_time_philo_started_to_eat(philo, \
 			threads_params->number, get_time());
-	time_now = get_time() - threads_params->philo->started_time;
-	ft_printf(1, msg, time_now, threads_params->number);
+	pthread_mutex_lock(&threads_params->philo->print_mutex);
+	time_now = get_time() \
+		- philo->started_time;
+	if (!get_is_over(threads_params->philo))
+		ft_printf(1, msg, time_now, threads_params->number);
 	pthread_mutex_unlock(&threads_params->philo->print_mutex);
 }
 
@@ -43,7 +45,7 @@ void	print_death(t_philo *philo, int philo_number)
 
 	pthread_mutex_lock(&philo->print_mutex);
 	time_now = get_time() - philo->started_time;
-	ft_printf(1, RED "%d %d died\n" RESET, time_now, philo_number);
+	ft_printf(1,"%d %d died\n", time_now, philo_number);
 	pthread_mutex_unlock(&philo->print_mutex);
 }
 
@@ -63,8 +65,14 @@ void	get_forks(t_threads_params *threads_params, \
 	print_action(threads_params, "%d %d has taken a fork\n", FALSE);
 	print_action(threads_params, "%d %d is eating\n", TRUE);
 	ft_msleep(threads_params->philo, threads_params->philo->time_to_eat);
-	pthread_mutex_unlock(left_fork_mutex);
-	pthread_mutex_unlock(right_fork_mutex);
+	if (threads_params->number % 2 == 1)
+		pthread_mutex_unlock(left_fork_mutex);
+	else
+		pthread_mutex_unlock(right_fork_mutex);
+	if (threads_params->number % 2 == 1)
+		pthread_mutex_unlock(right_fork_mutex);
+	else
+		pthread_mutex_unlock(left_fork_mutex);
 	threads_params->eat_count++;
 	check_i_am_enough_fed(threads_params);
 }
@@ -80,7 +88,8 @@ void	start_to_think(t_threads_params *threads_params)
 {
 	check_program_is_over(threads_params->philo);
 	print_action(threads_params, "%d %d is thinking\n", FALSE);
-	usleep(500);
+	if (threads_params->philo->n_of_philos % 2 == 1)
+		give_way(threads_params);
 }
 /* int main(int argc, char const *argv[])
 {

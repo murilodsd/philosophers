@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 03:24:16 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/18 16:55:51 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/20 19:55:06 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,15 @@ void	ft_msleep(t_philo *philo, long msec)
 		return ; */
 	(void)philo;
 	started_time = get_time();
+	usleep(msec * 1000 - 5000);
 	while (get_time() - started_time < msec)
 		usleep(500);
+}
+
+void	give_way(t_threads_params *threads_params)
+{
+	if (threads_params->eat_count % 2 == 0)
+		ft_msleep(threads_params->philo, threads_params->philo->time_to_eat/2 + 10);
 }
 
 /* int main(int argc, char const *argv[])

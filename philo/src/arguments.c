@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/18 13:43:31 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/20 09:51:58 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ time_to_sleep [number_of_times_each_philosopher_must_eat]\n\
 number_of_times_each_philosopher_must_eat is optional");
 		exit(EXIT_FAILURE);
 	}
-	if (!is_positive_atoi_param_max_10_digits(argv[1])
-		|| !is_positive_atoi_param_max_10_digits(argv[2])
-		|| !is_positive_atoi_param_max_10_digits(argv[3])
-		|| !is_positive_atoi_param_max_10_digits(argv[4])
-		|| (argc == 6 && !is_positive_atoi_param_max_10_digits(argv[5])))
+	while (argc-- > 1)
 	{
+		if (!is_positive_atoi_param_max_10_digits(argv[argc]) \
+			|| ft_atoi(argv[argc]) > INT_MAX)
+		{
 		ft_printf(2, RED \
-			"Error: Arguments must be a positive and max of 10 digits\n"RESET);
-		exit(EXIT_FAILURE);
+			"Error: Arguments must be a positive and <= INT_MAX\n"RESET);
+			exit(EXIT_FAILURE);
+		}
 	}
 }
 

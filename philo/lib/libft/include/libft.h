@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:52:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/18 12:57:15 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/20 09:46:36 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <stdio.h>
+# include <limits.h>
 
 typedef struct s_list
 {

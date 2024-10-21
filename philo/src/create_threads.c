@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 05:06:18 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/18 15:13:32 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/20 14:31:58 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	*pthread_created(void *params)
 	while (!get_is_all_philo_created(tparams))
 		;
 	if (tparams->number % 2 == 0)
-		usleep(1000);
+		usleep(20000);
 	if (tparams->philo->n_of_philos == 1)
 		handle_one_philo(tparams);
 	while (1)

@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/18 13:40:09 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/19 11:56:44 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ long long	safe_get_long_long(pthread_mutex_t *mutex, long long *variable);
 //--------------------------------------------------------//
 long long	get_time(void);
 void		ft_msleep(t_philo *philo, long msec);
+void		give_way(t_threads_params *threads_params);
 
 //--------------------------------------------------------//
 //------------------handle_mem_alloc.c--------------------//
