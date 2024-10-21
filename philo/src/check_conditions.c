@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:19:23 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/18 13:36:36 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/21 22:33:28 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	check_i_am_enough_fed(t_threads_params *threads_params)
 	t_philo	*philo;
 
 	philo = threads_params->philo;
-	check_program_is_over(philo);
+	//edited
+	//check_program_is_over(threads_params->philo);
 	if (threads_params->eat_count == philo->n_of_times_to_eat)
 		set_philo_enough_fed_true(threads_params);
 }

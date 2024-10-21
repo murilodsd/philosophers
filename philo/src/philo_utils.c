@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 03:24:16 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/20 19:55:06 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/21 23:01:50 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_msleep(t_philo *philo, long msec)
 	long long	started_time;
 	//bool		is_over;
 
+	//edited
 	/* is_over = safe_get_bool(&philo->is_over_mutex, &philo->is_over);
 	if (is_over == TRUE)
 		return ; */
@@ -38,7 +39,9 @@ void	ft_msleep(t_philo *philo, long msec)
 void	give_way(t_threads_params *threads_params)
 {
 	if (threads_params->eat_count % 2 == 0)
-		ft_msleep(threads_params->philo, threads_params->philo->time_to_eat/2 + 10);
+		//ft_msleep(threads_params->philo, threads_params->philo->time_to_eat/2 + 10);
+		//edit
+		usleep(20000);
 }
 
 /* int main(int argc, char const *argv[])

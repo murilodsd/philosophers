@@ -1,0 +1,368 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+100.00      0.01     0.01    28300     0.00     0.00  
+  0.00      0.01     0.00    32542     0.00     0.00  safe_get_bool
+  0.00      0.01     0.00    31241     0.00     0.00  get_is_all_philo_created
+  0.00      0.01     0.00    29345     0.00     0.00  get_time
+  0.00      0.01     0.00    28298     0.00     0.00  get_time_started_to_eat
+  0.00      0.01     0.00      914     0.00     0.01  check_philo_is_dead
+  0.00      0.01     0.00      914     0.00     0.00  get_is_philo_enough_fed
+  0.00      0.01     0.00      305     0.00     0.00  get_is_over
+  0.00      0.01     0.00      196     0.00     0.00  print_action
+  0.00      0.01     0.00      106     0.00     0.00  check_program_is_over
+  0.00      0.01     0.00       76     0.00     0.00  ft_msleep
+  0.00      0.01     0.00       76     0.00     0.00  safe_set_long_long
+  0.00      0.01     0.00       75     0.00     0.00  set_time_philo_started_to_eat
+  0.00      0.01     0.00       59     0.00     0.00  get_forks
+  0.00      0.01     0.00       45     0.00     0.00  check_i_am_enough_fed
+  0.00      0.01     0.00       35     0.00     0.00  check_mem_alloc
+  0.00      0.01     0.00       34     0.00     0.00  save_pointer
+  0.00      0.01     0.00       30     0.00     0.00  create_philo
+  0.00      0.01     0.00       30     0.00     0.00  give_way
+  0.00      0.01     0.00       29     0.00     0.00  start_to_sleep
+  0.00      0.01     0.00       28     0.00     0.00  start_to_think
+  0.00      0.01     0.00        6     0.00     0.00  initialize_mutex
+  0.00      0.01     0.00        5     0.00     0.00  destroy_mutex
+  0.00      0.01     0.00        5     0.00     0.00  is_positive_atoi_param_max_10_digits
+  0.00      0.01     0.00        2     0.00     0.00  safe_set_bool
+  0.00      0.01     0.00        1     0.00     0.00  check_arguments
+  0.00      0.01     0.00        1     0.00     0.00  create_all_mutex
+  0.00      0.01     0.00        1     0.00     0.00  create_all_philos
+  0.00      0.01     0.00        1     0.00     0.00  destroy_all_mutex
+  0.00      0.01     0.00        1     0.00     0.00  free_all
+  0.00      0.01     0.00        1     0.00     0.00  get_arguments_and_init
+  0.00      0.01     0.00        1     0.00     0.00  init_fork_mutex_variable
+  0.00      0.01     0.00        1     0.00     0.00  init_pointers
+  0.00      0.01     0.00        1     0.00     0.00  print_death
+  0.00      0.01     0.00        1     0.00     0.00  set_all_threads_created
+  0.00      0.01     0.00        1     0.00     0.00  set_is_over
+  0.00      0.01     0.00        1     0.00     0.00  start_dinner
+  0.00      0.01     0.00        1     0.00    10.00  wait_philo_die_or_philos_fed
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 100.00% of 0.01 seconds
+
+index % time    self  children    called     name
+                0.01    0.00   28300/28300       get_time_started_to_eat [2]
+[1]    100.0    0.01    0.00   28300          [1]
+-----------------------------------------------
+                0.00    0.01   28298/28298       check_philo_is_dead [3]
+[2]    100.0    0.00    0.01   28298         get_time_started_to_eat [2]
+                0.01    0.00   28300/28300        [1]
+-----------------------------------------------
+                0.00    0.01     914/914         wait_philo_die_or_philos_fed [4]
+[3]    100.0    0.00    0.01     914         check_philo_is_dead [3]
+                0.00    0.01   28298/28298       get_time_started_to_eat [2]
+                0.00    0.00   28299/29345       get_time [8]
+                0.00    0.00     914/914         get_is_philo_enough_fed [9]
+                0.00    0.00       1/1           set_is_over [38]
+                0.00    0.00       1/1           print_death [36]
+-----------------------------------------------
+                0.00    0.01       1/1           main [5]
+[4]    100.0    0.00    0.01       1         wait_philo_die_or_philos_fed [4]
+                0.00    0.01     914/914         check_philo_is_dead [3]
+-----------------------------------------------
+                                                 <spontaneous>
+[5]    100.0    0.00    0.01                 main [5]
+                0.00    0.01       1/1           wait_philo_die_or_philos_fed [4]
+                0.00    0.00       1/1           check_arguments [28]
+                0.00    0.00       1/1           get_arguments_and_init [33]
+                0.00    0.00       1/1           create_all_mutex [29]
+                0.00    0.00       1/1           create_all_philos [30]
+                0.00    0.00       1/1           destroy_all_mutex [31]
+                0.00    0.00       1/1           free_all [32]
+-----------------------------------------------
+                0.00    0.00     304/32542       get_is_over [10]
+                0.00    0.00     914/32542       get_is_philo_enough_fed [9]
+                0.00    0.00   31324/32542       get_is_all_philo_created [7]
+[6]      0.0    0.00    0.00   32542         safe_get_bool [6]
+-----------------------------------------------
+                0.00    0.00   31241/31241       pthread_created [85]
+[7]      0.0    0.00    0.00   31241         get_is_all_philo_created [7]
+                0.00    0.00   31324/32542       safe_get_bool [6]
+-----------------------------------------------
+                0.00    0.00       1/29345       get_arguments_and_init [33]
+                0.00    0.00       1/29345       start_dinner [39]
+                0.00    0.00       1/29345       print_death [36]
+                0.00    0.00     244/29345       print_action [11]
+                0.00    0.00     799/29345       ft_msleep [13]
+                0.00    0.00   28299/29345       check_philo_is_dead [3]
+[8]      0.0    0.00    0.00   29345         get_time [8]
+-----------------------------------------------
+                0.00    0.00     914/914         check_philo_is_dead [3]
+[9]      0.0    0.00    0.00     914         get_is_philo_enough_fed [9]
+                0.00    0.00     914/32542       safe_get_bool [6]
+-----------------------------------------------
+                0.00    0.00     107/305         check_program_is_over [12]
+                0.00    0.00     198/305         print_action [11]
+[10]     0.0    0.00    0.00     305         get_is_over [10]
+                0.00    0.00     304/32542       safe_get_bool [6]
+-----------------------------------------------
+                0.00    0.00      29/196         start_to_sleep [22]
+                0.00    0.00      30/196         start_to_think [23]
+                0.00    0.00     137/196         get_forks [16]
+[11]     0.0    0.00    0.00     196         print_action [11]
+                0.00    0.00     244/29345       get_time [8]
+                0.00    0.00     198/305         get_is_over [10]
+                0.00    0.00      46/75          set_time_philo_started_to_eat [15]
+-----------------------------------------------
+                0.00    0.00      46/106         check_i_am_enough_fed [17]
+                0.00    0.00      60/106         get_forks [16]
+[12]     0.0    0.00    0.00     106         check_program_is_over [12]
+                0.00    0.00     107/305         get_is_over [10]
+-----------------------------------------------
+                0.00    0.00      30/76          start_to_sleep [22]
+                0.00    0.00      46/76          get_forks [16]
+[13]     0.0    0.00    0.00      76         ft_msleep [13]
+                0.00    0.00     799/29345       get_time [8]
+-----------------------------------------------
+                0.00    0.00      76/76          set_time_philo_started_to_eat [15]
+[14]     0.0    0.00    0.00      76         safe_set_long_long [14]
+-----------------------------------------------
+                0.00    0.00      29/75          start_dinner [39]
+                0.00    0.00      46/75          print_action [11]
+[15]     0.0    0.00    0.00      75         set_time_philo_started_to_eat [15]
+                0.00    0.00      76/76          safe_set_long_long [14]
+-----------------------------------------------
+                0.00    0.00      59/59          pthread_created [85]
+[16]     0.0    0.00    0.00      59         get_forks [16]
+                0.00    0.00     137/196         print_action [11]
+                0.00    0.00      60/106         check_program_is_over [12]
+                0.00    0.00      46/76          ft_msleep [13]
+                0.00    0.00      45/45          check_i_am_enough_fed [17]
+-----------------------------------------------
+                0.00    0.00      45/45          get_forks [16]
+[17]     0.0    0.00    0.00      45         check_i_am_enough_fed [17]
+                0.00    0.00      46/106         check_program_is_over [12]
+-----------------------------------------------
+                0.00    0.00       5/35          init_pointers [35]
+                0.00    0.00      30/35          create_philo [20]
+[18]     0.0    0.00    0.00      35         check_mem_alloc [18]
+                0.00    0.00      34/34          save_pointer [19]
+-----------------------------------------------
+                0.00    0.00      34/34          check_mem_alloc [18]
+[19]     0.0    0.00    0.00      34         save_pointer [19]
+-----------------------------------------------
+                0.00    0.00      30/30          create_all_philos [30]
+[20]     0.0    0.00    0.00      30         create_philo [20]
+                0.00    0.00      30/35          check_mem_alloc [18]
+-----------------------------------------------
+                0.00    0.00      30/30          start_to_think [23]
+[21]     0.0    0.00    0.00      30         give_way [21]
+-----------------------------------------------
+                0.00    0.00      29/29          pthread_created [85]
+[22]     0.0    0.00    0.00      29         start_to_sleep [22]
+                0.00    0.00      30/76          ft_msleep [13]
+                0.00    0.00      29/196         print_action [11]
+-----------------------------------------------
+                0.00    0.00      28/28          pthread_created [85]
+[23]     0.0    0.00    0.00      28         start_to_think [23]
+                0.00    0.00      30/196         print_action [11]
+                0.00    0.00      30/30          give_way [21]
+-----------------------------------------------
+                0.00    0.00       6/6           create_all_mutex [29]
+[24]     0.0    0.00    0.00       6         initialize_mutex [24]
+-----------------------------------------------
+                0.00    0.00       5/5           destroy_all_mutex [31]
+[25]     0.0    0.00    0.00       5         destroy_mutex [25]
+-----------------------------------------------
+                0.00    0.00       5/5           check_arguments [28]
+[26]     0.0    0.00    0.00       5         is_positive_atoi_param_max_10_digits [26]
+-----------------------------------------------
+                0.00    0.00       1/2           set_is_over [38]
+                0.00    0.00       1/2           set_all_threads_created [37]
+[27]     0.0    0.00    0.00       2         safe_set_bool [27]
+-----------------------------------------------
+                0.00    0.00       1/1           main [5]
+[28]     0.0    0.00    0.00       1         check_arguments [28]
+                0.00    0.00       5/5           is_positive_atoi_param_max_10_digits [26]
+-----------------------------------------------
+                0.00    0.00       1/1           main [5]
+[29]     0.0    0.00    0.00       1         create_all_mutex [29]
+                0.00    0.00       6/6           initialize_mutex [24]
+-----------------------------------------------
+                0.00    0.00       1/1           main [5]
+[30]     0.0    0.00    0.00       1         create_all_philos [30]
+                0.00    0.00      30/30          create_philo [20]
+                0.00    0.00       1/1           start_dinner [39]
+-----------------------------------------------
+                0.00    0.00       1/1           main [5]
+[31]     0.0    0.00    0.00       1         destroy_all_mutex [31]
+                0.00    0.00       5/5           destroy_mutex [25]
+-----------------------------------------------
+                0.00    0.00       1/1           main [5]
+[32]     0.0    0.00    0.00       1         free_all [32]
+-----------------------------------------------
+                0.00    0.00       1/1           main [5]
+[33]     0.0    0.00    0.00       1         get_arguments_and_init [33]
+                0.00    0.00       1/29345       get_time [8]
+                0.00    0.00       1/1           init_pointers [35]
+                0.00    0.00       1/1           init_fork_mutex_variable [34]
+-----------------------------------------------
+                0.00    0.00       1/1           get_arguments_and_init [33]
+[34]     0.0    0.00    0.00       1         init_fork_mutex_variable [34]
+-----------------------------------------------
+                0.00    0.00       1/1           get_arguments_and_init [33]
+[35]     0.0    0.00    0.00       1         init_pointers [35]
+                0.00    0.00       5/35          check_mem_alloc [18]
+-----------------------------------------------
+                0.00    0.00       1/1           check_philo_is_dead [3]
+[36]     0.0    0.00    0.00       1         print_death [36]
+                0.00    0.00       1/29345       get_time [8]
+-----------------------------------------------
+                0.00    0.00       1/1           start_dinner [39]
+[37]     0.0    0.00    0.00       1         set_all_threads_created [37]
+                0.00    0.00       1/2           safe_set_bool [27]
+-----------------------------------------------
+                0.00    0.00       1/1           check_philo_is_dead [3]
+[38]     0.0    0.00    0.00       1         set_is_over [38]
+                0.00    0.00       1/2           safe_set_bool [27]
+-----------------------------------------------
+                0.00    0.00       1/1           create_all_philos [30]
+[39]     0.0    0.00    0.00       1         start_dinner [39]
+                0.00    0.00      29/75          set_time_philo_started_to_eat [15]
+                0.00    0.00       1/29345       get_time [8]
+                0.00    0.00       1/1           set_all_threads_created [37]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [28] check_arguments        [16] get_forks               [6] safe_get_bool
+  [17] check_i_am_enough_fed   [7] get_is_all_philo_created [1] 
+  [18] check_mem_alloc        [10] get_is_over            [27] safe_set_bool
+   [3] check_philo_is_dead     [9] get_is_philo_enough_fed [14] safe_set_long_long
+  [12] check_program_is_over   [8] get_time               [19] save_pointer (handle_mem_alloc.c)
+  [29] create_all_mutex        [2] get_time_started_to_eat [37] set_all_threads_created
+  [30] create_all_philos      [21] give_way               [38] set_is_over
+  [20] create_philo (create_threads.c) [34] init_fork_mutex_variable (arguments.c) [15] set_time_philo_started_to_eat
+  [31] destroy_all_mutex      [35] init_pointers (arguments.c) [39] start_dinner (create_threads.c)
+  [25] destroy_mutex (clean_program.c) [24] initialize_mutex (create_mutex.c) [22] start_to_sleep
+  [32] free_all               [26] is_positive_atoi_param_max_10_digits (arguments.c) [23] start_to_think
+  [13] ft_msleep              [11] print_action            [4] wait_philo_die_or_philos_fed (philo.c)
+  [33] get_arguments_and_init [36] print_death
