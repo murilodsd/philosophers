@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:07:32 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/21 17:03:12 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:04:13 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	wait_philo_die_or_philos_fed(t_philo *philo)
 {
 	int		i;
 
+	usleep(30000);
 	while (!check_philo_is_dead(philo) && !check_all_philos_fed(philo))
 		usleep(1000);
 	i = 0;

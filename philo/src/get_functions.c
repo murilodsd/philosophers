@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:49:54 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/22 04:28:07 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:37:48 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ long long	get_time_started_to_eat(t_philo *philo, int philo_index)
 		&philo->time_started_to_eat[philo_index]));
 }
 
-bool	get_is_philo_enough_fed(t_philo *philo, int philo_nbr)
+bool	get_is_philo_enough_fed(t_philo *philo, int philo_index)
 {
-	return (safe_get_bool(&philo->is_philo_enough_fed_mutex, \
-		&philo->is_philo_enough_fed[philo_nbr]));
+	return (safe_get_bool(&philo->is_philo_enough_fed_mutex[philo_index], \
+		&philo->is_philo_enough_fed[philo_index]));
 }
 
 bool	get_is_over(t_philo *philo)

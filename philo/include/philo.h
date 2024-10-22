@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/22 04:27:24 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:12:09 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,42 +32,41 @@
  */
 typedef struct s_philo
 {
-	t_mem_alloc	mem_alloc;
-	long long			started_time;
-	int					n_of_philos;
-	int					time_to_die;
-	int	 				time_to_eat;
-	int					time_to_sleep;
-	int					n_of_times_to_eat;
-	long long	*time_started_to_eat;
-	bool		*is_philo_enough_fed;
+	t_mem_alloc		mem_alloc;
+	long long		started_time;
+	int				n_of_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				n_of_times_to_eat;
+	long long		*time_started_to_eat;
+	bool			*is_philo_enough_fed;
 	bool			is_over;
 	bool			is_anyone_dead;
 	bool			is_all_philos_created;
-	pthread_t	*threads;
+	pthread_t		*threads;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	*time_started_to_eat_mutex;
 	pthread_mutex_t	is_over_mutex;
 	pthread_mutex_t	is_anyone_dead_mutex;
 	pthread_mutex_t	is_all_philos_created_mutex;
-	pthread_mutex_t	is_philo_enough_fed_mutex;
+	pthread_mutex_t	*is_philo_enough_fed_mutex;
 	bool			*forks_mutex_initialized;
 	bool			print_mutex_initialized;
 	bool			*time_started_to_eat_initialized;
 	bool			is_over_mutex_initialized;
 	bool			is_anyone_dead_mutex_initialized;
 	bool			is_all_philos_created_mutex_initialized;
-	bool			is_philo_enough_fed_mutex_initialized;
+	bool			*is_philo_enough_fed_mutex_initialized;
 }	t_philo;
 
 typedef struct s_threads_params
 {
 	t_philo	*philo;
-	int	number;
-	int	eat_count;
-} t_threads_params;
-
+	int		number;
+	int		eat_count;
+}	t_threads_params;
 
 //--------------------------------------------------------//
 //--------------------arguments.c-------------------------//
@@ -88,20 +87,19 @@ void		create_all_philos(t_philo *philo);
 //--------------------------------------------------------//
 //---------------------monitor.c--------------------------//
 //--------------------------------------------------------//
-void	print_action(t_threads_params *threads_params, \
+void		print_action(t_threads_params *threads_params, \
 	char *msg, bool is_eating);
-void	print_death(t_philo *philo, int philo_number);
-void	get_forks(t_threads_params *threads_params, \
+void		print_death(t_philo *philo, int philo_number);
+void		get_forks(t_threads_params *threads_params, \
 	pthread_mutex_t *left_fork_mutex, pthread_mutex_t *right_fork_mutex);
-void	start_to_sleep(t_threads_params *threads_params);
-void	start_to_think(t_threads_params *threads_params);
+void		start_to_sleep(t_threads_params *threads_params);
+void		start_to_think(t_threads_params *threads_params);
 
 //--------------------------------------------------------//
 //-----------------check_conditions.c---------------------//
 //--------------------------------------------------------//
 bool		check_philo_is_dead(t_philo *philo);
 void		check_i_am_enough_fed(t_threads_params *threads_params);
-bool		get_is_philo_enough_fed(t_philo *philo, int philo_nbr);
 bool		check_all_philos_fed(t_philo *philo);
 void		check_program_is_over(t_philo *philo);
 
@@ -110,13 +108,13 @@ void		check_program_is_over(t_philo *philo);
 //--------------------------------------------------------//
 bool		get_is_all_philo_created(t_threads_params *threads_params);
 long long	get_time_started_to_eat(t_philo *philo, int philo_index);
-bool		get_is_philo_enough_fed(t_philo *philo, int philo_nbr);
+bool		get_is_philo_enough_fed(t_philo *philo, int philo_index);
 bool		get_is_over(t_philo *philo);
 
 //--------------------------------------------------------//
 //--------------------set_functions.c---------------------//
 //--------------------------------------------------------//
-void	set_time_philo_started_to_eat(t_philo *philo, int philo_nbr, \
+void		set_time_philo_started_to_eat(t_philo *philo, int philo_nbr, \
 	long long value);
 void		set_philo_enough_fed_true(t_threads_params *threads_params);
 void		set_is_over(t_philo *philo, bool value);

@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 05:06:18 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/20 14:31:58 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:51:34 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ void	create_all_philos(t_philo *philo)
 		create_philo(philo, i);
 		i++;
 	}
-	usleep(2000);
+	usleep(5000);
 	start_dinner(philo);
 }

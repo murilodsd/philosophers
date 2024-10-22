@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 04:27:17 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/19 15:22:36 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:35:53 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	destroy_all_mutex(t_philo *philo)
 		philo->is_anyone_dead_mutex_initialized);
 	destroy_mutex(&philo->is_all_philos_created_mutex, \
 		philo->is_all_philos_created_mutex_initialized);
-	destroy_mutex(&philo->is_philo_enough_fed_mutex, \
-		philo->is_philo_enough_fed_mutex_initialized);
 	if (philo->forks)
 	{
 		i = 0;
@@ -57,6 +55,10 @@ void	destroy_all_mutex(t_philo *philo)
 		{
 			if (philo->forks_mutex_initialized[i])
 				destroy_mutex(&philo->forks[i], TRUE);
+			if (philo->time_started_to_eat_initialized[i])
+				destroy_mutex(&philo->time_started_to_eat_mutex[i], TRUE);
+			if (philo->is_philo_enough_fed_mutex_initialized[i])
+				destroy_mutex(&philo->is_philo_enough_fed_mutex[i], TRUE);
 			i++;
 		}
 	}

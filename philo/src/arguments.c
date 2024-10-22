@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/22 04:43:48 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:18:55 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ number_of_times_each_philosopher_must_eat is optional");
 		if (!is_positive_atoi_param_max_10_digits(argv[argc]) \
 			|| ft_atoi(argv[argc]) > INT_MAX)
 		{
-		ft_printf(2, RED \
-			"Error: Arguments must be a positive and <= INT_MAX\n"RESET);
-			exit(EXIT_FAILURE);
+			ft_printf(2, RED \
+				"Error: Arguments must be a positive and <= INT_MAX\n"RESET);
+				exit(EXIT_FAILURE);
 		}
 	}
 }
@@ -54,9 +54,6 @@ static void	init_pointers(t_philo **philo)
 
 	ptr_list = (*philo)->mem_alloc.ptr_mem_list;
 	n_of_philos = (*philo)->n_of_philos;
-	(*philo)->forks = ft_calloc(n_of_philos, sizeof(pthread_mutex_t));
-	check_mem_alloc((*philo), &ptr_list, (*philo)->forks, \
-		"ft_calloc failed");
 	(*philo)->time_started_to_eat = ft_calloc(n_of_philos, sizeof(long long));
 	check_mem_alloc((*philo), &ptr_list, (*philo)->time_started_to_eat, \
 		"ft_calloc failed");
@@ -68,6 +65,12 @@ static void	init_pointers(t_philo **philo)
 		"ft_calloc failed");
 	(*philo)->is_philo_enough_fed = ft_calloc(n_of_philos, sizeof(bool));
 	check_mem_alloc((*philo), &ptr_list, (*philo)->is_philo_enough_fed, \
+		"ft_calloc failed");
+	(*philo)->is_philo_enough_fed_mutex = ft_calloc(n_of_philos, sizeof(pthread_mutex_t));
+	check_mem_alloc((*philo), &ptr_list, (*philo)->is_philo_enough_fed_mutex, \
+		"ft_calloc failed");
+	(*philo)->is_philo_enough_fed_mutex_initialized = ft_calloc(n_of_philos, sizeof(bool));
+	check_mem_alloc((*philo), &ptr_list, (*philo)->is_philo_enough_fed_mutex_initialized, \
 		"ft_calloc failed");
 	(*philo)->threads = ft_calloc(n_of_philos, sizeof(pthread_t));
 	check_mem_alloc((*philo), &ptr_list, (*philo)->threads, \
@@ -107,10 +110,10 @@ void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
 	(*philo)->is_over_mutex_initialized = FALSE;
 	(*philo)->is_anyone_dead_mutex_initialized = FALSE;
 	(*philo)->is_all_philos_created_mutex_initialized = FALSE;
-	(*philo)->is_philo_enough_fed_mutex_initialized = FALSE;
 	init_pointers(philo);
 	init_mutex_array_initialized((*philo)->forks_mutex_initialized, (*philo)->n_of_philos);
 	init_mutex_array_initialized((*philo)->time_started_to_eat_initialized, (*philo)->n_of_philos);
+	init_mutex_array_initialized((*philo)->is_philo_enough_fed_mutex_initialized, (*philo)->n_of_philos);
 }
 
 /* int	main(int argc, char *argv[])
