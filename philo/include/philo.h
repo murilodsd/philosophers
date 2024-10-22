@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 23:03:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/19 11:56:44 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 04:27:24 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ typedef struct s_philo
 	pthread_t	*threads;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
-	pthread_mutex_t	time_started_to_eat_mutex;
+	pthread_mutex_t	*time_started_to_eat_mutex;
 	pthread_mutex_t	is_over_mutex;
 	pthread_mutex_t	is_anyone_dead_mutex;
 	pthread_mutex_t	is_all_philos_created_mutex;
 	pthread_mutex_t	is_philo_enough_fed_mutex;
 	bool			*forks_mutex_initialized;
 	bool			print_mutex_initialized;
-	bool			time_started_to_eat_initialized;
+	bool			*time_started_to_eat_initialized;
 	bool			is_over_mutex_initialized;
 	bool			is_anyone_dead_mutex_initialized;
 	bool			is_all_philos_created_mutex_initialized;

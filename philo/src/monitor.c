@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:08:23 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/20 20:05:58 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 10:11:50 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_action(t_threads_params *threads_params, char *msg, \
 	time_now = get_time() \
 		- philo->started_time;
 	if (!get_is_over(threads_params->philo))
-		ft_printf(1, msg, time_now, threads_params->number);
+		printf(msg, time_now, threads_params->number);
 	pthread_mutex_unlock(&threads_params->philo->print_mutex);
 }
 
@@ -45,7 +45,7 @@ void	print_death(t_philo *philo, int philo_number)
 
 	pthread_mutex_lock(&philo->print_mutex);
 	time_now = get_time() - philo->started_time;
-	ft_printf(1,"%d %d died\n", time_now, philo_number);
+	printf("%ld %d died\n", time_now, philo_number);
 	pthread_mutex_unlock(&philo->print_mutex);
 }
 
@@ -79,14 +79,16 @@ void	get_forks(t_threads_params *threads_params, \
 
 void	start_to_sleep(t_threads_params *threads_params)
 {
-	check_program_is_over(threads_params->philo);
+	//edited
+	//check_program_is_over(threads_params->philo);
 	print_action(threads_params, "%d %d is sleeping\n", FALSE);
 	ft_msleep(threads_params->philo, threads_params->philo->time_to_sleep);
 }
 
 void	start_to_think(t_threads_params *threads_params)
 {
-	check_program_is_over(threads_params->philo);
+	//edited
+	//check_program_is_over(threads_params->philo);
 	print_action(threads_params, "%d %d is thinking\n", FALSE);
 	if (threads_params->philo->n_of_philos % 2 == 1)
 		give_way(threads_params);

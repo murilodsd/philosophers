@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:49:54 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/18 12:33:08 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 04:28:07 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	get_is_all_philo_created(t_threads_params *threads_params)
 
 long long	get_time_started_to_eat(t_philo *philo, int philo_index)
 {
-	return (safe_get_long_long(&philo->time_started_to_eat_mutex, \
+	return (safe_get_long_long(&philo->time_started_to_eat_mutex[philo_index], \
 		&philo->time_started_to_eat[philo_index]));
 }
 

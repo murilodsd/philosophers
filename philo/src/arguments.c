@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/20 09:51:58 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 04:43:48 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ static void	init_pointers(t_philo **philo)
 	(*philo)->time_started_to_eat = ft_calloc(n_of_philos, sizeof(long long));
 	check_mem_alloc((*philo), &ptr_list, (*philo)->time_started_to_eat, \
 		"ft_calloc failed");
+	(*philo)->time_started_to_eat_mutex = ft_calloc(n_of_philos, sizeof(pthread_mutex_t));
+	check_mem_alloc((*philo), &ptr_list, (*philo)->time_started_to_eat_mutex, \
+		"ft_calloc failed");
+	(*philo)->time_started_to_eat_initialized = ft_calloc(n_of_philos, sizeof(bool));
+	check_mem_alloc((*philo), &ptr_list, (*philo)->time_started_to_eat_initialized, \
+		"ft_calloc failed");
 	(*philo)->is_philo_enough_fed = ft_calloc(n_of_philos, sizeof(bool));
 	check_mem_alloc((*philo), &ptr_list, (*philo)->is_philo_enough_fed, \
 		"ft_calloc failed");
@@ -71,13 +77,13 @@ static void	init_pointers(t_philo **philo)
 		"ft_calloc failed");
 }
 
-static void	init_fork_mutex_variable(t_philo **philo)
+static void	init_mutex_array_initialized(bool *mutex_array, int n_of_mutex)
 {
 	int	i;
 
 	i = 0;
-	while (i < (*philo)->n_of_philos)
-		(*philo)->forks_mutex_initialized[i++] = FALSE;
+	while (i < n_of_mutex)
+		mutex_array[i++] = FALSE;
 }
 
 void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
@@ -98,13 +104,13 @@ void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
 	(*philo)->forks = NULL;
 	(*philo)->threads = NULL;
 	(*philo)->print_mutex_initialized = FALSE;
-	(*philo)->time_started_to_eat_initialized = FALSE;
 	(*philo)->is_over_mutex_initialized = FALSE;
 	(*philo)->is_anyone_dead_mutex_initialized = FALSE;
 	(*philo)->is_all_philos_created_mutex_initialized = FALSE;
 	(*philo)->is_philo_enough_fed_mutex_initialized = FALSE;
 	init_pointers(philo);
-	init_fork_mutex_variable(philo);
+	init_mutex_array_initialized((*philo)->forks_mutex_initialized, (*philo)->n_of_philos);
+	init_mutex_array_initialized((*philo)->time_started_to_eat_initialized, (*philo)->n_of_philos);
 }
 
 /* int	main(int argc, char *argv[])

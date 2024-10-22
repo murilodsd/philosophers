@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 03:24:16 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/20 19:55:06 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 10:14:35 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	ft_msleep(t_philo *philo, long msec)
 void	give_way(t_threads_params *threads_params)
 {
 	if (threads_params->eat_count % 2 == 0)
-		ft_msleep(threads_params->philo, threads_params->philo->time_to_eat/2 + 10);
+		usleep(20000);
+		//edited
+		//ft_msleep(threads_params->philo, threads_params->philo->time_to_eat/2 + 10);
 }
 
 /* int main(int argc, char const *argv[])
