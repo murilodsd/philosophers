@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 03:24:16 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/22 10:14:35 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 20:04:18 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@ long long	get_time(void)
 void	ft_msleep(t_philo *philo, long msec)
 {
 	long long	started_time;
-	//bool		is_over;
 
-	/* is_over = safe_get_bool(&philo->is_over_mutex, &philo->is_over);
-	if (is_over == TRUE)
-		return ; */
 	(void)philo;
 	started_time = get_time();
 	usleep(msec * 1000 - 5000);
@@ -39,8 +35,29 @@ void	give_way(t_threads_params *threads_params)
 {
 	if (threads_params->eat_count % 2 == 0)
 		usleep(20000);
-		//edited
-		//ft_msleep(threads_params->philo, threads_params->philo->time_to_eat/2 + 10);
+}
+
+void	init_bool_pointer(t_philo **philo)
+{
+	int		n_of_philos;
+	t_list	**ptr_list;
+
+	ptr_list = &(*philo)->mem_alloc.ptr_mem_list;
+	n_of_philos = (*philo)->n_of_philos;
+	(*philo)->time_started_to_eat_initialized = \
+		ft_calloc(n_of_philos, sizeof(bool));
+	check_mem_alloc((*philo), ptr_list, \
+		(*philo)->time_started_to_eat_initialized, "ft_calloc failed");
+	(*philo)->is_philo_enough_fed = ft_calloc(n_of_philos, sizeof(bool));
+	check_mem_alloc((*philo), ptr_list, (*philo)->is_philo_enough_fed, \
+		"ft_calloc failed");
+	(*philo)->is_philo_enough_fed_mutex_initialized = \
+		ft_calloc(n_of_philos, sizeof(bool));
+	check_mem_alloc((*philo), ptr_list, \
+		(*philo)->is_philo_enough_fed_mutex_initialized, "ft_calloc failed");
+	(*philo)->forks_mutex_initialized = ft_calloc(n_of_philos, sizeof(bool));
+	check_mem_alloc((*philo), ptr_list, (*philo)->forks_mutex_initialized, \
+		"ft_calloc failed");
 }
 
 /* int main(int argc, char const *argv[])

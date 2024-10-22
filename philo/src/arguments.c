@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:19:09 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/22 17:18:55 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/10/22 20:06:10 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ number_of_times_each_philosopher_must_eat is optional");
 		{
 			ft_printf(2, RED \
 				"Error: Arguments must be a positive and <= INT_MAX\n"RESET);
-				exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
 	}
 }
@@ -50,40 +50,36 @@ number_of_times_each_philosopher_must_eat is optional");
 static void	init_pointers(t_philo **philo)
 {
 	int		n_of_philos;
-	t_list	*ptr_list;
+	t_list	**ptr_list;
 
-	ptr_list = (*philo)->mem_alloc.ptr_mem_list;
+	ptr_list = &(*philo)->mem_alloc.ptr_mem_list;
 	n_of_philos = (*philo)->n_of_philos;
+	(*philo)->forks = ft_calloc(n_of_philos, sizeof(pthread_mutex_t));
+	check_mem_alloc((*philo), ptr_list, (*philo)->forks, \
+		"ft_calloc failed");
 	(*philo)->time_started_to_eat = ft_calloc(n_of_philos, sizeof(long long));
-	check_mem_alloc((*philo), &ptr_list, (*philo)->time_started_to_eat, \
+	check_mem_alloc((*philo), ptr_list, (*philo)->time_started_to_eat, \
 		"ft_calloc failed");
-	(*philo)->time_started_to_eat_mutex = ft_calloc(n_of_philos, sizeof(pthread_mutex_t));
-	check_mem_alloc((*philo), &ptr_list, (*philo)->time_started_to_eat_mutex, \
+	(*philo)->time_started_to_eat_mutex = \
+		ft_calloc(n_of_philos, sizeof(pthread_mutex_t));
+	check_mem_alloc((*philo), ptr_list, (*philo)->time_started_to_eat_mutex, \
 		"ft_calloc failed");
-	(*philo)->time_started_to_eat_initialized = ft_calloc(n_of_philos, sizeof(bool));
-	check_mem_alloc((*philo), &ptr_list, (*philo)->time_started_to_eat_initialized, \
-		"ft_calloc failed");
-	(*philo)->is_philo_enough_fed = ft_calloc(n_of_philos, sizeof(bool));
-	check_mem_alloc((*philo), &ptr_list, (*philo)->is_philo_enough_fed, \
-		"ft_calloc failed");
-	(*philo)->is_philo_enough_fed_mutex = ft_calloc(n_of_philos, sizeof(pthread_mutex_t));
-	check_mem_alloc((*philo), &ptr_list, (*philo)->is_philo_enough_fed_mutex, \
-		"ft_calloc failed");
-	(*philo)->is_philo_enough_fed_mutex_initialized = ft_calloc(n_of_philos, sizeof(bool));
-	check_mem_alloc((*philo), &ptr_list, (*philo)->is_philo_enough_fed_mutex_initialized, \
+	(*philo)->is_philo_enough_fed_mutex = \
+		ft_calloc(n_of_philos, sizeof(pthread_mutex_t));
+	check_mem_alloc((*philo), ptr_list, (*philo)->is_philo_enough_fed_mutex, \
 		"ft_calloc failed");
 	(*philo)->threads = ft_calloc(n_of_philos, sizeof(pthread_t));
-	check_mem_alloc((*philo), &ptr_list, (*philo)->threads, \
+	check_mem_alloc((*philo), ptr_list, (*philo)->threads, \
 		"ft_calloc failed");
-	(*philo)->forks_mutex_initialized = ft_calloc(n_of_philos, sizeof(bool));
-	check_mem_alloc((*philo), &ptr_list, (*philo)->forks_mutex_initialized, \
-		"ft_calloc failed");
+	init_bool_pointer(philo);
 }
 
-static void	init_mutex_array_initialized(bool *mutex_array, int n_of_mutex)
+static void	init_mutex_array_initialized(t_philo *philo, bool *mutex_array)
 {
 	int	i;
+	int	n_of_mutex;
 
+	n_of_mutex = philo->n_of_philos;
 	i = 0;
 	while (i < n_of_mutex)
 		mutex_array[i++] = FALSE;
@@ -111,9 +107,11 @@ void	get_arguments_and_init(int argc, char *argv[], t_philo **philo)
 	(*philo)->is_anyone_dead_mutex_initialized = FALSE;
 	(*philo)->is_all_philos_created_mutex_initialized = FALSE;
 	init_pointers(philo);
-	init_mutex_array_initialized((*philo)->forks_mutex_initialized, (*philo)->n_of_philos);
-	init_mutex_array_initialized((*philo)->time_started_to_eat_initialized, (*philo)->n_of_philos);
-	init_mutex_array_initialized((*philo)->is_philo_enough_fed_mutex_initialized, (*philo)->n_of_philos);
+	init_mutex_array_initialized(*philo, (*philo)->forks_mutex_initialized);
+	init_mutex_array_initialized(*philo, \
+		(*philo)->time_started_to_eat_initialized);
+	init_mutex_array_initialized(*philo, \
+		(*philo)->is_philo_enough_fed_mutex_initialized);
 }
 
 /* int	main(int argc, char *argv[])
