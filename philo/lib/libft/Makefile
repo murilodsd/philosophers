@@ -30,7 +30,7 @@ OBJS=$(addprefix $(OBJ_PATH), $(OBJS_NAMES))
 INCLUDE=-I ./include
 RM=rm -f
 
-all: $(NAME)
+all: msg $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $?
@@ -39,6 +39,9 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	mkdir -p $(OBJ_PATH)
 	$(CC) $(CCFLAGS) -c $< -o $@ $(INCLUDE)
 
+msg:
+	@echo "\033[1;34m📚 Generating static library... Consolidating knowledge into blocks! 🏗️\033[0m"
+
 clean:
 	$(RM) $(OBJS)
 
@@ -46,3 +49,7 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all bonus clean fclean re generating_static_library_msg
+
+.SILENT:

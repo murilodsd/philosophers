@@ -27,11 +27,15 @@ RM=rm -f
 
 all: $(NAME)
 
-$(NAME): libs $(OBJS) $(LIB_STATIC)
+$(NAME): msg libs $(OBJS) $(LIB_STATIC)
 	$(CC) $(CCFLAGS) $(OBJS) $(INCLUDE_FLAG) $(LIBS_FLAGS) -o $(NAME)
+	echo "\033[1;32m✔ Compilation complete! 🎉\033[0m"
+
+msg:
+	@echo "\033[1;32m🌟 Compiling... The code is coming to life! 🚀\033[0m"
 
 libs:
-	make all -C lib/libft
+	make -s all -C lib/libft
 
 bonus: libs $(NAME_BONUS)
 
@@ -47,11 +51,13 @@ $(OBJ_PATH_BONUS)%.o: $(SRC_PATH_BONUS)%.c
 	$(CC) $(CCFLAGS) -c $< -o $@ $(INCLUDE_FLAG)
 
 clean:
-	make clean -C lib/libft
+	@echo "\033[1;33m🧹 Cleaning up... The code feels lighter! ✨\033[0m"
+	make -s clean -C lib/libft
 	$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	make fclean -C lib/libft
+	@echo "\033[1;31m🔥 Removing everything... Preparing the ground for new builds! 🔨\033[0m"
+	make -s fclean -C lib/libft
 	$(RM) $(NAME) $(NAME_BONUS)
 
 re: fclean all bonus
@@ -60,4 +66,6 @@ norm:
 	norminette -R CheckDefine $(INCLUDE_PATH)*.h
 	norminette -R CheckForbiddenSourceHeader $(SRC_PATH)*.c
 
-.PHONY=all bonus clean fclean re norm libs
+.PHONY: all bonus clean fclean re norm libs
+
+.SILENT:
