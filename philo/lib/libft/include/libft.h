@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:52:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/10/20 09:46:36 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/11 09:22:48 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,9 +147,9 @@ int		ft_tolower(int c);
 size_t	ft_mtxlen(char **matrix);
 char	**ft_mtxdup(char **matrix);
 void	flood_fill(char **tab, t_point size, t_point begin);
-//--------------------------------------------------------//
-//---------------------FT_PRINTF--------------------------//
-//--------------------------------------------------------//
+
+// -------------------- FT_PRINTF FUNCTION PROTOTYPES -------------- //
+
 int		ft_printf(int fd, const char *format, ...);
 int		ft_putnbr_hexabase_fd(t_ul nbr, char *base, int fd);
 int		ft_printnbr_fd(long nbr, t_params params, int fd);
@@ -157,13 +157,13 @@ int		ft_print_s_fd(char *s, t_params params, int fd);
 int		ft_printnbr_base_fd(t_ul nbr, t_params params, char *base, int fd);
 int		ft_printchar_fd(char c, t_params params, int fd);
 int		ft_print_p_fd(t_ul p, t_params params, int fd);
-//--------------------------------------------------------//
-//--------------------GET_NEXT_LINE-----------------------//
-//--------------------------------------------------------//
+
+// ------------------- GET_NEXT_LINE FUNCTION PROTOTYPES ----------- //
+
 char	*get_next_line(int fd);
-//--------------------------------------------------------//
-//--------------CHECK_ERROR AND FREE MEMORY---------------//
-//--------------------------------------------------------//
+
+//-------------- CHECK_ERROR AND FREE MEMORY FUNCTION PROTOTYPES --- //
+
 void	ft_free_exit_error(t_mem_alloc *mem_allocation, char *error_msg);
 void	ft_save_pointer(t_mem_alloc *mem_allocation, \
 	t_list **ptr_or_matrix_list, void *ptr);
